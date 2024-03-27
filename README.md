@@ -462,7 +462,7 @@ If you need to sort by multiple properties these can just be separated by commas
 Example: `sort=-name,age` - Sort by name descending, then age ascending.
 
 #### Sort alphabetically
-In certain cases you might want to enforce that even numeric values are sorted alphabetically, so 1000 is less than 30. In those cases you can prepend the sort property with a tilde (~).
+In certain cases you might want to enforce that even numeric values are sorted alphabetically, so e.g. 1000 is less than 30. In those cases you can prepend the sort property with a tilde (~).
 
 Example: `sort=~age` - Sort by age alphabetically.
 
@@ -477,10 +477,18 @@ TODO
 TODO
 
 ## Examples
-TODO
+* See the Spring Boot application [test case](https://github.com/acntech/kollective-query/tree/main/src/test/kotlin/no/acntech/kollectiveq/test/app)
+    * Configuration: [JPA Config](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/app/config/JpaConfig.kt) [Converters](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/app/config/ConvertersConfigurer.kt)
+    * Repository: [EmployeeRepository](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/app/domain/repository/EmployeeRepository.kt)
+    * Controller: [EmployeeController](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/app/controller/EmployeeController.kt)
+    * Service: [EmployeeService](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/app/domain/core/DefaultEmployeeService.kt)
+    * [Repo tests](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/apptest/domain/repostitory/MiscRepoTests.kt)
+* See [FilterTest.kt](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/FilterTest.kt)
+* See [SortingTests.kt](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/SortingTests.kt)
 
 ## API Reference
-TODO
+- [JavaDoc](http://blog.acntech.no/kollective-query/javadoc/index.html)
+- [KDoc](http://blog.acntech.no/kollective-query/kotlindoc/index.html)
 
 ## Known Issues
 TODO
