@@ -37,7 +37,6 @@ open class ConvertersConfigurer(
       }
    }
 
-
    override fun addFormatters(registry: FormatterRegistry) {
       registry.addConverter(filterConverter)
       registry.addConverter(sortingConverter)

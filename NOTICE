@@ -1,22 +1,45 @@
 KollectiveQuery Project
+
 Copyright 2024 Accenture AS
 
-The KollectiveQuery project is developed and maintained by Thomas Muller (thomas.muller@accenture.com).
+The KollectiveQuery project is developed and maintained by Thomas Muller (thomas.muller@accenture.com) (me.thomas.muller@gmail.com).
 
 This product includes software developed at The Apache Software Foundation (http://www.apache.org/).
 
-Additional notices:
+Additional Notices
 
-1. This product includes software developed by JetBrains (http://www.jetbrains.com/):
+1. JetBrains (http://www.jetbrains.com/):
+
+   This product includes the following software developed by JetBrains:
    - Kotlin Reflect
    - Kotlin Standard Library
+
    The Kotlin libraries are used under the terms of the Apache License 2.0.
 
-2. This product includes software developed by Danilo Pianini (https://github.com/DanySK):
-   - khttp
-   The khttp library is used under the terms of the MIT License.
+2. Spring Framework:
 
-Disclaimer:
+   This product includes software from the Spring Framework, under the Apache License 2.0. More details are available at https://spring.io/projects/spring-framework.
 
-This is not an official translation of the Apache License. It is simply a helpful guide to include necessary legal notices and attributions. It is the responsibility of the user of the license to ensure compliance with any applicable local laws and regulations.
+3. Apache Commons Lang:
 
+   This product includes software from the Apache Commons Lang project (https://commons.apache.org/proper/commons-lang/), used under the Apache License 2.0.
+
+4. Google Guava:
+
+   This product includes software from Google Guava, used under the Apache License 2.0. More details are available at https://github.com/google/guava.
+
+5. ANTLR (ANother Tool for Language Recognition):
+
+   This product includes software from the ANTLR project (https://www.antlr.org/), used under the BSD License.
+
+6. JUnit:
+
+   This product includes JUnit, a unit testing framework for Java, used under the Eclipse Public License 2.0. More details are available at https://junit.org/junit5/.
+
+7. H2 Database Engine:
+
+   This product includes the H2 Database Engine, used under the Mozilla Public License 2.0 or the Eclipse Public License 1.0. More details are available at https://www.h2database.com.
+
+Disclaimer
+
+This NOTICE file is provided "as is", and it does not represent an official translation of any licenses. It serves as a guide to include necessary legal notices and attributions. It is the responsibility of the user of the license to ensure compliance with the licenses and any applicable local laws or regulations.

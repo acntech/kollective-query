@@ -4,24 +4,301 @@
 
 1. [Introduction](#Introduction)
 2. [Getting Started](#Getting-Started)
-3. [Requirements](#Requirements)
-4. [Configuration](#Configuration)
-5. [Examples](#Examples)
-6. [API Reference](#API-Reference)
-7. [Known Issues](#Known-Issues)
-8. [Troubleshooting](#Troubleshooting)
-9. [FAQs](#FAQs)
-10. [Community and Support](#Community-and-Support)
-11. [Acknowledgments](#Acknowledgments)
-12. [Roadmap](#Roadmap)
-13. [Contributing](#Contributing)
-14. [License](#License)
+3. [The Query DSL](#The-Query-DSL)   
+   1. [Pagination](#Pagination)
+   2. [Filtering](#Filtering)
+      1. [URL Encoding](#URL-Encoding)
+      2. [Specifying Operator affinity](#Specifying-Operator-affinity)
+      3. [Filter Operators](#Filter-Operators)
+      4. [Sub-queries](#Sub-queries)
+      5. [Substring matching](#Substring-matching)
+      6. [Escaping special characters](#Escaping-special-characters)
+      7. [Null values](#Null-values)
+      8. [Timestamps and time related values](#Timestamps-and-time-related-values)
+      9. [Using in and not in operators](#Using-in-and-not-in-operators) 
+4. [Requirements](#Requirements)
+5. [Configuration](#Configuration)
+6. [Examples](#Examples)
+7. [API Reference](#API-Reference)
+8. [Known Issues](#Known-Issues)
+9. [Troubleshooting](#Troubleshooting)
+10. [FAQs](#FAQs)
+11. [Community and Support](#Community-and-Support)
+12. [Acknowledgments](#Acknowledgments)
+13. [Roadmap](#Roadmap)
+14. [Contributing](#Contributing)
+15. [License](#License)
 
 ## Introduction
 
 KollectiveQuery is a DSL for filtering, sorting and paginating collections, primarily used by front-end apps over HTTP/REST. The DSL can typically be used on REST collection endpoints to build dynamic queries. The DSL is inspired by the [mongoDB query language](https://docs.mongodb.com/manual/reference/operator/query/).
 
 ## Getting Started
+
+To add filter mechanics to JPA repositories, you need to
+1. Add a Spring Configuration class to configure EntityScan and EnableJpaRepositories
+
+Kotlin
+```kotlin
+import no.acntech.kollectiveq.persistence.DefaultFilterRepository
+import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+
+@Configuration
+@EntityScan(basePackages = ["package.to.scan.for.entities"])
+@EnableJpaRepositories(
+   basePackages = [
+      "no.acntech.kollectiveq.persistence",
+      "package.to.scan.for.repositories"
+   ],
+   repositoryBaseClass = DefaultFilterRepository::class
+)
+open class JpaConfig
+```
+
+Java
+```java
+import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import no.acntech.kollectiveq.persistence.DefaultFilterRepository;
+
+@Configuration
+@EntityScan(basePackages = {"package.to.scan.for.entities"})
+@EnableJpaRepositories(
+    basePackages = {
+        "no.acntech.kollectiveq.persistence",
+        "package.to.scan.for.repositories"
+    },
+    repositoryBaseClass = DefaultFilterRepository.class
+)
+public class JpaConfig {
+  // Any additional configuration or beans can go here
+}
+```
+
+2. Enable filtering (and pagination and sorting) by using `FilterRepository` as a super-interface for your JPA repositories. 
+
+Kotlin
+```kotlin
+import com.google.common.base.CaseFormat
+import no.acntech.kollectiveq.Filter
+import no.acntech.kollectiveq.Pagination
+import no.acntech.kollectiveq.Sorting
+import no.acntech.kollectiveq.lang.TransformFunction
+import no.acntech.kollectiveq.lang.createCaseFormatTransformFunction
+import org.springframework.data.domain.Page
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.NoRepositoryBean
+import java.io.Serializable
+
+@NoRepositoryBean
+interface FilterRepository<E, ID : Serializable> : JpaRepository<E, ID> {
+
+   fun getEntities(
+      pagination: Pagination,
+      filter: Filter?,
+      sorting: Sorting?,
+      fieldTransformer: TransformFunction<String, String> =
+         createCaseFormatTransformFunction(
+            CaseFormat.LOWER_UNDERSCORE,
+            CaseFormat.LOWER_CAMEL
+         ),
+   ): Page<E>
+
+}
+```
+
+Java
+```java
+import com.google.common.base.CaseFormat;
+import no.acntech.kollectiveq.Filter;
+import no.acntech.kollectiveq.Pagination;
+import no.acntech.kollectiveq.Sorting;
+import no.acntech.kollectiveq.lang.TransformFunction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+import java.io.Serializable;
+import java.util.function.Function;
+
+@NoRepositoryBean
+public interface FilterRepository<E, ID extends Serializable> extends JpaRepository<E, ID> {
+
+    default Function<String, String> createCaseFormatTransformFunction(CaseFormat fromFormat, CaseFormat toFormat) {
+        return input -> fromFormat.to(toFormat, input);
+    }
+
+    Page<E> getEntities(Pagination pagination, Filter filter, Sorting sorting, Function<String, String> fieldTransformer);
+}
+```
+
+3. Add converters to allow HTTP query params to be converted to `Filter`, `Pagination` and `Sorting` objects.
+
+Kotlin
+
+```kotlin
+import no.acntech.kollectiveq.Filter
+import no.acntech.kollectiveq.Pagination
+import no.acntech.kollectiveq.Sorting
+import org.springframework.context.annotation.Configuration
+import org.springframework.core.convert.converter.Converter
+import org.springframework.format.FormatterRegistry
+import org.springframework.stereotype.Component
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+
+@Configuration
+open class ConvertersConfigurer(
+   private val filterConverter: Converter<String, Filter>,
+   private val sortingConverter: Converter<String, Sorting>,
+   private val paginationConverter: Converter<String, Pagination>,
+) : WebMvcConfigurer {
+
+   @Component
+   class FilterConverter : Converter<String, Filter> {
+      override fun convert(source: String): Filter {
+         return Filter.of(source)
+      }
+   }
+
+   @Component
+   class SortingConverter : Converter<String, Sorting> {
+      override fun convert(source: String): Sorting {
+         return Sorting.of(source)
+      }
+   }
+
+   @Component
+   class PaginationConverter : Converter<String, Pagination> {
+      override fun convert(source: String): Pagination {
+         return Pagination.of(source)
+      }
+   }
+
+   override fun addFormatters(registry: FormatterRegistry) {
+      registry.addConverter(filterConverter)
+      registry.addConverter(sortingConverter)
+      registry.addConverter(paginationConverter)
+   }
+
+}
+```
+
+Java
+
+```java
+import no.acntech.kollectiveq.Filter;
+import no.acntech.kollectiveq.Pagination;
+import no.acntech.kollectiveq.Sorting;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class ConvertersConfigurer implements WebMvcConfigurer {
+
+    private final Converter<String, Filter> filterConverter;
+    private final Converter<String, Sorting> sortingConverter;
+    private final Converter<String, Pagination> paginationConverter;
+
+    // Constructor injection in Java
+    public ConvertersConfigurer(Converter<String, Filter> filterConverter,
+                                 Converter<String, Sorting> sortingConverter,
+                                 Converter<String, Pagination> paginationConverter) {
+        this.filterConverter = filterConverter;
+        this.sortingConverter = sortingConverter;
+        this.paginationConverter = paginationConverter;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(filterConverter);
+        registry.addConverter(sortingConverter);
+        registry.addConverter(paginationConverter);
+    }
+
+    // Inner classes for converters
+    @Component
+    public static class FilterConverter implements Converter<String, Filter> {
+        @Override
+        public Filter convert(String source) {
+            return Filter.of(source);
+        }
+    }
+
+    @Component
+    public static class SortingConverter implements Converter<String, Sorting> {
+        @Override
+        public Sorting convert(String source) {
+            return Sorting.of(source);
+        }
+    }
+
+    @Component
+    public static class PaginationConverter implements Converter<String, Pagination> {
+        @Override
+        public Pagination convert(String source) {
+            return Pagination.of(source);
+        }
+    }
+}
+```
+
+4. Use the repositories from a Controller or a Service
+
+Kotlin
+
+```kotlin
+@RestController
+@RequestMapping("/employees")
+class EmployeeController(
+   private val employeeRepo: EmployeeRepository,
+) {
+   @GetMapping
+   fun getAll(
+      @RequestParam(name = "pagination", required = false) pagination: Pagination?,
+      @RequestParam(name = "filter", required = false) filter: Filter?,
+      @RequestParam(name = "sort", required = false) sorting: Sorting?,
+   ): ResponseEntity<List<Employee>> {
+      val effectivePagination = pagination ?: Pagination()
+      val employees = employeeRepo.getEntities(effectivePagination, filter, sorting)
+      return ResponseEntity.ok(employees.content)
+   }
+
+}
+```
+
+Java
+
+```java
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+
+    private final EmployeeRepository employeeRepo;
+
+    @Autowired
+    public EmployeeController(EmployeeRepository employeeRepo) {
+        this.employeeRepo = employeeRepo;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAll(
+            @RequestParam(name = "pagination", required = false) Pagination pagination,
+            @RequestParam(name = "filter", required = false) Filter filter,
+            @RequestParam(name = "sort", required = false) Sorting sorting) {
+        // In Java, you need to handle the null case explicitly, as Java does not have a safe call operator like Kotlin.
+        Pagination effectivePagination = pagination != null ? pagination : new Pagination();
+        Page<Employee> employees = employeeRepo.getEntities(effectivePagination, filter, sorting);
+        return ResponseEntity.ok(employees.getContent());
+    }
+}
+```
+
+## The Query DSL
 
 ### Pagination
 Pagination on collections can be done using the query string parameter `pagination`. The pagination parameter is made up of a set of key-value pairs, separated by the dollar sign ($). The key is the name of the pagination parameter, and the value is the value of the pagination parameter.
@@ -224,7 +501,7 @@ TODO
 TODO
 
 ## Contributing
-- Thomas Muller (thomas.muller@accenture.com): main contributor and maintainer
+- Thomas Muller (thomas.muller@accenture.com) (me.thomas.muller@gmail.com): main contributor and maintainer
 
 ## License
 This software is licensed under the Apache 2 license, see LICENSE and NOTICE for details.

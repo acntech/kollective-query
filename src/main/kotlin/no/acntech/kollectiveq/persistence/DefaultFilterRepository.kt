@@ -17,6 +17,18 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformation
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository
 import java.io.Serializable
 
+/**
+ * Represents the default implementation of the FilterRepository interface.
+ * <p>
+ * This is the class users of the DSL will normayy interact with when they want to filter entities. All the filtering logic is
+ * implemented here.
+ *
+ * @param T the entity type
+ * @param ID the ID type of the entity
+ * @constructor Creates a DefaultFilterRepository with the specified entity information and entity manager.
+ * @param entityInformation the JpaEntityInformation object that provides metadata about the entity
+ * @param entityManager the EntityManager used to interact with the database
+ */
 class DefaultFilterRepository<T : Any, ID : Serializable>(
    entityInformation: JpaEntityInformation<T, ID>,
    private val entityManager: EntityManager,

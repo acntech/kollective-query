@@ -327,8 +327,8 @@
           <execution>
             <phase>pre-site</phase>
             <goals>
-              <!--<goal>dokka</goal> -->
-              <goal>javadoc</goal>
+              <goal>dokka</goal>
+              <!--<goal>javadoc</goal> -->
             </goals>
             <configuration>
             </configuration>
@@ -338,13 +338,14 @@
           <sourceDirectories>
             <dir>${project.basedir}/src/main/kotlin</dir>
           </sourceDirectories>
-          <outputDir>${project.basedir}/javadoc</outputDir>
+          <!-- <outputDir>${project.basedir}/javadoc</outputDir> -->
+          <outputDir>${project.basedir}/kotlindoc</outputDir>
           <sourceLinks>
             <link>
               <!-- Source directory -->
               <path>src/main/kotlin</path>
               <!-- URL showing where the source code can be accessed through the web browser -->
-              <url>https://github.com/acntech/easycontainers/tree/main/src/main/kotlin</url>
+              <url>https://github.com/acntech/kollective-query/tree/main/src/main/kotlin</url>
               <lineSuffix>#L</lineSuffix>
             </link>
           </sourceLinks>
