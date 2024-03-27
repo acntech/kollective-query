@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>KollectiveQuery</name>
+  <description>Yet another QueryDSL</description>
+  <groupId>no.acntech.kollectivequery</groupId>
+  <artifactId>kollectivequery</artifactId>
+  <version>0.1.${revision}</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <skipTests>true</skipTests>
+    <owasp.skip>true</owasp.skip>
+    <java.version>21</java.version>
+    <kotlin.version>1.9.21</kotlin.version>
+    <maven.version>[3.9,)</maven.version>
+
+    <!-- Semantic versioning -->
+    <revision>SNAPSHOT</revision>
+
+    <!-- Library versions -->
+    <spring-boot-dependencies.version>3.2.4</spring-boot-dependencies.version>
+    <h2.version>2.2.224</h2.version>
+    <commons.lang3.version>3.14.0</commons.lang3.version>
+    <guava.version>33.1.0-jre</guava.version>
+    <junit.version>5.10.2</junit.version>
+    <antlr4.version>4.13.1</antlr4.version>
+
+    <!-- Plugin versions -->
+    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
+    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
+    <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
+    <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+    <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+    <dependency-check-maven.version>9.0.10</dependency-check-maven.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot-dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons.lang3.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+
+    <!-- ANTLR dependency -->
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4-runtime</artifactId>
+      <version>${antlr4.version}</version>
+    </dependency>
+
+    <!-- Test dependencies -->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${h2.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${build-helper-maven-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.owasp</groupId>
+          <artifactId>dependency-check-maven</artifactId>
+          <version>${dependency-check-maven.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${versions-maven-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-maven-plugin</artifactId>
+          <version>${kotlin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.jetbrains.dokka</groupId>
+          <artifactId>dokka-maven-plugin</artifactId>
+          <version>${dokka-maven-plugin.version}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>META-INF/lib/</classpathPrefix>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+            <manifestEntries>
+              <Project-Name>${project.name}</Project-Name>
+              <Project-Description>${project.description}</Project-Description>
+              <Project-Version>${project.version}</Project-Version>
+              <Project-GroupId>${project.groupId}</Project-GroupId>
+              <Project-Build-FinalName>${project.build.finalName}</Project-Build-FinalName>
+              <Build-Time>${maven.build.timestamp}</Build-Time>
+              <Built-By>${user.name}</Built-By>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+
+        <configuration>
+          <args>
+            <arg>-Xjsr305=strict</arg>
+          </args>
+        </configuration>
+
+        <dependencies>
+          <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-allopen</artifactId>
+            <version>${kotlin.version}</version>
+          </dependency>
+        </dependencies>
+
+        <executions>
+
+          <execution>
+            <id>compile</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>test-compile</id>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.antlr</groupId>
+        <artifactId>antlr4-maven-plugin</artifactId>
+        <version>${antlr4.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>antlr4</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <visitor>true</visitor>
+          <sourceDirectory>src/main/antlr4</sourceDirectory>
+          <outputDirectory>${project.build.directory}/generated-sources/antlr4</outputDirectory>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/antlr4</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jetbrains.dokka</groupId>
+        <artifactId>dokka-maven-plugin</artifactId>
+        <version>${dokka-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>pre-site</phase>
+            <goals>
+              <!--<goal>dokka</goal> -->
+              <goal>javadoc</goal>
+            </goals>
+            <configuration>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <sourceDirectories>
+            <dir>${project.basedir}/src/main/kotlin</dir>
+          </sourceDirectories>
+          <outputDir>${project.basedir}/javadoc</outputDir>
+          <sourceLinks>
+            <link>
+              <!-- Source directory -->
+              <path>src/main/kotlin</path>
+              <!-- URL showing where the source code can be accessed through the web browser -->
+              <url>https://github.com/acntech/easycontainers/tree/main/src/main/kotlin</url>
+              <lineSuffix>#L</lineSuffix>
+            </link>
+          </sourceLinks>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <configuration>
+          <skip>${owasp.skip}</skip>
+          <!-- <failBuildOnCVSS>7.0</failBuildOnCVSS> -->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven-enforcer-plugin.version}</version>
+        <executions>
+
+          <execution>
+            <id>enforce-versions</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <fail>false</fail>
+              <rules>
+
+                <requireMavenVersion>
+                  <version>${maven.version}</version>
+                </requireMavenVersion>
+
+                <requireJavaVersion>
+                  <version>${java.version}</version>
+                </requireJavaVersion>
+
+                <DependencyConvergence/>
+
+              </rules>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>enforce-banned-dependencies</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <fail>false</fail>
+              <rules>
+                <bannedDependencies>
+                  <excludes>
+                    <exclude>commons-logging:commons-logging</exclude>
+                    <exclude>log4j:log4j</exclude>
+                    <exclude>org.apache.logging.log4j:log4j-core</exclude>
+                  </excludes>
+                </bannedDependencies>
+              </rules>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>
