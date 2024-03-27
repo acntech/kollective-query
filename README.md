@@ -512,4 +512,4 @@ TODO
 - Thomas Muller (thomas.muller@accenture.com) (me.thomas.muller@gmail.com): main contributor and maintainer
 
 ## License
-This software is licensed under the Apache 2 license, see LICENSE and NOTICE for details.
+This software is licensed under the Apache 2 license, see [LICENSE](https://github.com/acntech/kollective-query/blob/main/LICENSE) and [NOTICE](https://github.com/acntech/kollective-query/blob/main/NOTICE) for details.
