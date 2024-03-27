@@ -8,8 +8,6 @@ import java.nio.charset.StandardCharsets
 
 /**
  * Sorting class for building sort criteria from a string.
- * <p>
- * Inspired by https://restdocs.e-conomic.com/#sorting.
  */
 data class Sorting(
    val criteria: MutableList<SortCriterion> = mutableListOf(),
@@ -28,7 +26,7 @@ data class Sorting(
 
       companion object {
          fun of(dirString: String): Direction {
-            return Direction.values().firstOrNull { it.representation == dirString }
+            return entries.firstOrNull { it.representation == dirString }
                ?: throw DetailedParseException("Unknown sort direction $dirString")
          }
       }
