@@ -379,7 +379,7 @@ The allowed filtering operators are:
 #### Sub-queries
 The `$having:` operator allows you to specify a sub-query for criteria purposes. The sub-query is specified as a filter expression using the following syntax: `$having:<field-name>(<filter expression>)`.
 
-The sub-query is evaluated for each resour[MiscRepoTests.kt](src%2Ftest%2Fkotlin%2Fno%2Facntech%2Fapp%2Fdomain%2Frepostitory%2FMiscRepoTests.kt)ce in the collection and only matching resources are returned.
+The sub-query is evaluated for each resource in the collection and only matching resources are returned.
 
 Example: Assume querying the departments endpoint, and the there is a one-to-many relationship between departments and employees. The following query will return all departments that have at least one employee with the name 'Joe': `filter=$having:employees(name$eq:Joe)` 
 
@@ -500,7 +500,7 @@ TODO
 No specific configuration is needed to use the library. However, to use the library with JPA repositories, you need to configure the [`FilterRepository`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/persistence/FilterRepository.kt) as a super-interface for your JPA repositories and make sure to add converters to allow HTTP query params to be converted to the Filter, Sorting and Pagination objects.
 
 ## Security
-Dynamic query generation is inherently vulnerable to SQL/query language injection attacks. Always traverse the parsed [Filter](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [Sorting](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) and [[index.html](src%2Fmain%2Fresources%2Findex.html)Pagination](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) structures with validators before or during transformation to the specific query language (note: only JPQL transformation is supported in the current version). E.g. for SQL and JPQL - never allow sorting on non-indexed attributes, limit the fields that can be used for filtering, limit the depth of and/or/not constructions, limit the length of the filter etc. Consider the risk and relevant mitigation techniques for your particular project before executing dynamically generated queries.
+Dynamic query generation is inherently vulnerable to SQL/query language injection attacks. Always traverse the parsed [Filter](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [Sorting](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) and [Pagination](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) structures with validators before or during transformation to the specific query language (note: only JPQL transformation is supported in the current version). E.g. for SQL and JPQL - never allow sorting on non-indexed attributes, limit the fields that can be used for filtering, limit the depth of and/or/not constructions, limit the length of the filter etc. Consider the risk and relevant mitigation techniques for your particular project before executing dynamically generated queries.
 
 ## Examples
 * See the Spring Boot application [test case](https://github.com/acntech/kollective-query/tree/main/src/test/kotlin/no/acntech/kollectiveq/test/app)
