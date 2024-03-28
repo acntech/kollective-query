@@ -18,25 +18,46 @@
       9. [Using in and not in operators](#Using-in-and-not-in-operators) 
 4. [Requirements](#Requirements)
 5. [Configuration](#Configuration)
-6. [Examples](#Examples)
-7. [API Reference](#API-Reference)
-8. [Known Issues](#Known-Issues)
-9. [Troubleshooting](#Troubleshooting)
-10. [FAQs](#FAQs)
-11. [Community and Support](#Community-and-Support)
-12. [Acknowledgments](#Acknowledgments)
-13. [Roadmap](#Roadmap)
-14. [Contributing](#Contributing)
-15. [License](#License)
+6. [Security](#Security)
+7. [Examples](#Examples)
+8. [API Reference](#API-Reference)
+9. [Known Issues](#Known-Issues)
+10. [Troubleshooting](#Troubleshooting)
+11. [FAQs](#FAQs)
+12. [Community and Support](#Community-and-Support)
+13. [Acknowledgments](#Acknowledgments)
+14. [Roadmap](#Roadmap)
+15. [Contributing](#Contributing)
+16. [License](#License)
 
 ## Introduction
+KollectiveQuery introduces a streamlined DSL (Domain-Specific Language) for effortlessly filtering, sorting, and paginating data, making it the ideal tool for developers crafting dynamic queries for RESTful services. Drawing inspiration from the expressive power of the MongoDB query language, KollectiveQuery elevates querying capabilities within HTTP/REST applications.
 
-KollectiveQuery is a DSL for filtering, sorting and paginating collections, primarily used by front-end apps over HTTP/REST. The DSL can typically be used on REST collection endpoints to build dynamic queries. The DSL is inspired by the [mongoDB query language](https://docs.mongodb.com/manual/reference/operator/query/).
+Our DSL abstracts queries into a storage-agnostic structure, which is then seamlessly translated into the specific syntax of target query languages. Currently, we support JPQL with plans to extend our support to SQL and beyond, broadening our adaptability and utility.
+
+- **Pagination**: Define both the page and results per page in a compact format, enabling efficient data navigation.
+Example: `pagination=$page:4$size:20`
+
+- **Sorting**: Easily arrange your data by specifying fields and directions using straightforward symbols.
+Example: `sort=-first_name,last_name,~-age` - sorts by first name (descending), then by last name (ascending), and finally by age (alphabetically descending).
+
+- **Filtering**: The core of KollectiveQuery - a robust system supporting logical operators and a variety of conditions to refine your searches to the finest detail.
+
+Example 1: To find resources with first_name starting with 'J', last_name ending with 'son', last login before May 2023, a birthdate on or after June 1st, and an age between 25 and 62:
+  `filter=first_name$like:J*$and:last_name$like:*son$and:last_login$lt:2023-05-01T00:00:00Z$and:birth_date$gte:06-01$and:$not:(age$lt:25$or:age$gte:62)`
+
+Example 2: Get all departments with an employee having first name Joe born before 1990:
+  `filter=$having:employees(first_name$eq:Joe$and:birth_date$lt:1990)`
+
+Example 3: Get all departments with a name starting with the letter 'P' having employees with an average birth-year greater than or equal to 2000: `name$like:P*$and:$having:AVG(employees.year_of_birth)$gte:2000`
+
+The elegance of KollectiveQuery is not just in its DSL but in its ability to transform complex filters into an optimized WHERE clause, tailored for JPQL or any future supported query language. This transformative capability ensures that KollectiveQuery remains a versatile, powerful tool for developers aiming to enhance the interactivity and responsiveness of their applications.
 
 ## Getting Started
 
-To add filter mechanics to JPA repositories, you need to
-1. Add a Spring Configuration class to configure EntityScan and EnableJpaRepositories
+To add filter mechanics to JPA repositories, you need to follow these steps:
+
+1. Add a Spring Configuration class to configure `EntityScan` and `EnableJpaRepositories`
 
 Kotlin
 ```kotlin
@@ -78,7 +99,7 @@ public class JpaConfig {
 }
 ```
 
-2. Enable filtering (and pagination and sorting) by using `FilterRepository` as a super-interface for your JPA repositories. 
+2. Enable filtering (and pagination and sorting) by using [`FilterRepository`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/persistence/FilterRepository.kt) as a super-interface for your JPA repositories. 
 
 Kotlin
 ```kotlin
@@ -134,7 +155,7 @@ public interface FilterRepository<E, ID extends Serializable> extends JpaReposit
 }
 ```
 
-3. Add converters to allow HTTP query params to be converted to `Filter`, `Pagination` and `Sorting` objects.
+3. Add converters to allow HTTP query params to be converted to [`Filter`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [`Pagination`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) and [`Sorting`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) objects.
 
 Kotlin
 
@@ -247,7 +268,7 @@ public class ConvertersConfigurer implements WebMvcConfigurer {
 }
 ```
 
-4. Use the repositories from a Controller or a Service
+4. Use the repositories from a `@Controller`, `@RestController` or `@Service`
 
 Kotlin
 
@@ -474,7 +495,10 @@ Example: `sort=~-age` - Sort by age descending alphabetically.
 TODO
 
 ## Configuration
-TODO
+No specific configuration is needed to use the library. However, to use the library with JPA repositories, you need to configure the [`FilterRepository`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/persistence/FilterRepository.kt) as a super-interface for your JPA repositories and make sure to add converters to allow HTTP query params to be converted to the Filter, Sorting and Pagination objects.
+
+## Security
+Dynamic query generation is inherently vulnerable to SQL/query language injection attacks. Always traverse the parsed [Filter](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [Sorting](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) and [Pagination](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) structures with validators before or during transformation to the specific query language (note: only JPQL transformation is supported in the current version). E.g. for SQL and JPQL - never allow sorting on non-indexed attributes, limit the fields that can be used for filtering, limit the depth of and/or/not constructions, limit the length of the filter etc. Consider the risk and relevant mitigation techniques for your particular project before executing dynamically generated queries.
 
 ## Examples
 * See the Spring Boot application [test case](https://github.com/acntech/kollective-query/tree/main/src/test/kotlin/no/acntech/kollectiveq/test/app)
@@ -491,7 +515,7 @@ TODO
 - [KDoc](http://blog.acntech.no/kollective-query/kotlindoc/index.html)
 
 ## Known Issues
-TODO
+- Deeply nested structures will (most likely) fail to parse and transform correctly. Test thoroughly before using deeply nested structures.
 
 ## Troubleshooting
 TODO
@@ -500,16 +524,19 @@ TODO
 TODO
 
 ## Community and Support
-TODO
+For issues and bugs please submit an issue on the [GitHub repository](https://github.com/acntech/kollective-query/issues). Also feel free to contact the main contributor and maintainer directly at his [personal email](mailto:me.thomas.muller@gmail.com) or [work email](mailto:thomas.muller@accenture.com).
 
 ## Acknowledgments
 TODO
 
 ## Roadmap
-TODO
+- [ ] Add support for SQL transformation
+- [ ] Add support for MongoDB query language transformation
+- [ ] Add support for ElasticSearch query language transformation
+- [ ] Add support for more complex queries and sub-queries 
 
 ## Contributing
-- Thomas Muller (thomas.muller@accenture.com) (me.thomas.muller@gmail.com): main contributor and maintainer
+- [Thomas Muller](mailto:thomas.muller@accenture.com) ([personal email](mailto:me.thomas.muller@gmail.com)): main contributor and maintainer
 
 ## License
 This software is licensed under the Apache 2 license, see [LICENSE](https://github.com/acntech/kollective-query/blob/main/LICENSE) and [NOTICE](https://github.com/acntech/kollective-query/blob/main/NOTICE) for details.
