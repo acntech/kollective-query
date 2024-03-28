@@ -46,18 +46,18 @@ Example: `sort=-first_name,last_name,~-age` - sorts by first name (descending), 
 Example 1: To find resources with first_name starting with 'J', last_name ending with 'son', last login before May 2023, a birthdate on or after June 1st, and an age between 25 and 62:
   `filter=first_name$like:J*$and:last_name$like:*son$and:last_login$lt:2023-05-01T00:00:00Z$and:birth_date$gte:06-01$and:$not:(age$lt:25$or:age$gte:62)`
 
-Example 2: Get all departments with an employee having first name Joe born before 1990:
+Example 2: Get all departments with at least one employee having first name Joe born before 1990:
   `filter=$having:employees(first_name$eq:Joe$and:birth_date$lt:1990)`
 
 Example 3: Get all departments with a name starting with the letter 'P' having employees with an average birth-year greater than or equal to 2000: `name$like:P*$and:$having:AVG(employees.year_of_birth)$gte:2000`
 
-The elegance of KollectiveQuery is not just in its DSL but in its ability to transform complex filters into an optimized WHERE clause, tailored for JPQL or any future supported query language. This transformative capability ensures that KollectiveQuery remains a versatile, powerful tool for developers aiming to enhance the interactivity and responsiveness of their applications.
+The elegance of KollectiveQuery is not just in its DSL but in its ability to transform complex filters into an optimized query, tailored for JPQL or any future supported query language. This transformative capability ensures that KollectiveQuery remains a versatile, powerful tool for developers aiming to enhance the interactivity and responsiveness of their applications.
 
 ## Getting Started
 
 To add filter mechanics to JPA repositories, you need to follow these steps:
 
-1. Add a Spring Configuration class to configure `EntityScan` and `EnableJpaRepositories`
+1. Add a Spring Configuration class to configure `EntityScan` and `EnableJpaRepositories`:
 
 Kotlin
 ```kotlin
@@ -89,7 +89,9 @@ import no.acntech.kollectiveq.persistence.DefaultFilterRepository;
 @EntityScan(basePackages = {"package.to.scan.for.entities"})
 @EnableJpaRepositories(
     basePackages = {
+        // The package where the FilterRepository and its default implementation is located
         "no.acntech.kollectiveq.persistence",
+        // The package where the application JPA repositories are located
         "package.to.scan.for.repositories"
     },
     repositoryBaseClass = DefaultFilterRepository.class
@@ -99,7 +101,7 @@ public class JpaConfig {
 }
 ```
 
-2. Enable filtering (and pagination and sorting) by using [`FilterRepository`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/persistence/FilterRepository.kt) as a super-interface for your JPA repositories. 
+2. Enable filtering (and pagination and sorting) by using [`FilterRepository`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/persistence/FilterRepository.kt) as a super-interface for your JPA repositories: 
 
 Kotlin
 ```kotlin
@@ -155,7 +157,7 @@ public interface FilterRepository<E, ID extends Serializable> extends JpaReposit
 }
 ```
 
-3. Add converters to allow HTTP query params to be converted to [`Filter`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [`Pagination`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) and [`Sorting`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) objects.
+3. Add converters to allow HTTP query params to be converted to [`Filter`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [`Pagination`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) and [`Sorting`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) objects:
 
 Kotlin
 
@@ -268,7 +270,7 @@ public class ConvertersConfigurer implements WebMvcConfigurer {
 }
 ```
 
-4. Use the repositories from a `@Controller`, `@RestController` or `@Service`
+4. Use the repositories from a `@Controller`, `@RestController` or `@Service`:
 
 Kotlin
 
@@ -498,7 +500,7 @@ TODO
 No specific configuration is needed to use the library. However, to use the library with JPA repositories, you need to configure the [`FilterRepository`](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/persistence/FilterRepository.kt) as a super-interface for your JPA repositories and make sure to add converters to allow HTTP query params to be converted to the Filter, Sorting and Pagination objects.
 
 ## Security
-Dynamic query generation is inherently vulnerable to SQL/query language injection attacks. Always traverse the parsed [Filter](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [Sorting](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) and [Pagination](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) structures with validators before or during transformation to the specific query language (note: only JPQL transformation is supported in the current version). E.g. for SQL and JPQL - never allow sorting on non-indexed attributes, limit the fields that can be used for filtering, limit the depth of and/or/not constructions, limit the length of the filter etc. Consider the risk and relevant mitigation techniques for your particular project before executing dynamically generated queries.
+Dynamic query generation is inherently vulnerable to SQL/query language injection attacks. Always traverse the parsed [Filter](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt), [Sorting](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Sorting.kt) and [[index.html](src%2Fmain%2Fresources%2Findex.html)Pagination](https://github.com/acntech/kollective-query/blob/main/src/main/kotlin/no/acntech/kollectiveq/Pagination.kt) structures with validators before or during transformation to the specific query language (note: only JPQL transformation is supported in the current version). E.g. for SQL and JPQL - never allow sorting on non-indexed attributes, limit the fields that can be used for filtering, limit the depth of and/or/not constructions, limit the length of the filter etc. Consider the risk and relevant mitigation techniques for your particular project before executing dynamically generated queries.
 
 ## Examples
 * See the Spring Boot application [test case](https://github.com/acntech/kollective-query/tree/main/src/test/kotlin/no/acntech/kollectiveq/test/app)
@@ -511,8 +513,8 @@ Dynamic query generation is inherently vulnerable to SQL/query language injectio
 * See [SortingTests.kt](https://github.com/acntech/kollective-query/blob/main/src/test/kotlin/no/acntech/kollectiveq/test/SortingTests.kt)
 
 ## API Reference
-- [JavaDoc](http://blog.acntech.no/kollective-query/javadoc/index.html)
-- [KDoc](http://blog.acntech.no/kollective-query/kotlindoc/index.html)
+- [JavaDoc](http://blog.acntech.no/kollective-query/apidocs/javadoc/index.html)
+- [KDoc](http://blog.acntech.no/kollective-query/apidocs/kdoc/index.html)
 
 ## Known Issues
 - Deeply nested structures will (most likely) fail to parse and transform correctly. Test thoroughly before using deeply nested structures.

@@ -1,0 +1,42 @@
+name: Generate and Publish Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Generate Javadoc
+        run: mvn dokka:javadoc -Ddokka.goal=javadoc -Ddokka.dir=./target/site/apidocs/javadoc
+
+      - name: Generate KDoc
+        run: mvn dokka:dokka -Ddokka.goal=dokka -Ddokka.dir=./target/site/apidocs/kdoc
+
+      - name: Prepare gh-pages content
+        run: |
+          cp -r ./src/main/resources/site/* .        
+          mkdir -p ./apidocs
+          cp -r ./target/site/apidocs/* ./apidocs/      
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          keep_files: false
+          allow_empty_commit: false
+          force_orphan: true

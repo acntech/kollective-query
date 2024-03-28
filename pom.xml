@@ -16,7 +16,7 @@
     <java.version>21</java.version>
     <kotlin.version>1.9.21</kotlin.version>
     <maven.version>[3.9,)</maven.version>
-    <dokka.dir>${project.basedir}/kdoc</dokka.dir>
+    <dokka.dir>${project.basedir}/target/site/apidocs/kdoc</dokka.dir>
     <dokka.goal>dokka</dokka.goal>
 
     <!-- Semantic versioning -->
