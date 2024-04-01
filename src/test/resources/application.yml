@@ -1,0 +1,116 @@
+debug: false
+
+### Spring server ###
+server:
+  port: 8080
+  forward-headers-strategy: framework
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: NEVER
+  tomcat:
+    uri-encoding: "UTF-8"
+    mbeanregistry:
+      enabled: false
+    keep-alive-timeout: "PT120S"
+  http:
+    encoding:
+      charset: "UTF-8"
+      enabled: "UTF-8"
+
+### Spring ###
+spring:
+
+  # Application
+  application:
+    name: KollectiveQueryTestApp
+
+  banner:
+    location: classpath:banner.txt
+
+  main:
+    web-application-type: SERVLET
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:app;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    username: sa
+    password: ~
+    h2:
+      console:
+        enabled: true
+
+    # Hikari connection pool
+    hikari:
+      initializationFailTimeout: -1
+      autoCommit: true
+      connectionTimeout: 30000  # 30 seconds
+      idleTimeout: 600000  # 10 minutes
+      maxLifetime: 1800000  # 30 minutes
+      connectionTestQuery: SELECT 1
+      minimumIdle: 2
+      maximumPoolSize: 10
+      poolName: appHikariPool
+      isolateInternalQueries: false
+      allowPoolSuspension: false
+      readOnly: false
+      registerMbeans: false
+      connectionInitSql: SELECT 1
+      transactionIsolation: TRANSACTION_READ_COMMITTED
+      leakDetectionThreshold: 0
+      validationTimeout: 5000
+
+  sql:
+    init:
+      mode: embedded
+
+  # JPA
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      connection:
+        charset: utf8
+        useUnicode: true
+      ddl-auto: none
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+          physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+          implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+          format_sql: true
+          use_sql_comments: true
+          generate_statistics: false
+          jdbc:
+            lob:
+              non_contextual_creation: true
+    data:
+      rest:
+        detection-strategy: annotated
+
+
+  ### Logging ###
+LOG_PATH: ./log
+
+logging:
+  level:
+    root: INFO
+    no.acntech: TRACE
+    org.springframework: INFO
+    org.hibernate: INFO
+    # Set to DEBUG for logging SQL queries
+    org.hibernate.SQL: DEBUG
+    # Set to TRACE for logging prepared statement parameters
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.stat: INFO
+    org.hibernate.SQL_SLOW: INFO
+    org.hibernate.cache: INFO
+
+### Hibernate ###
+hibernate:
+  enable_lazy_load_no_trans: true
+  temp:
+    use_jdbc_metadata_defaults: false

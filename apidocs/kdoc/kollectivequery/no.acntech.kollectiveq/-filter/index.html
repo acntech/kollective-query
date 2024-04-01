@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Filter</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            kollectivequery
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter="kollectivequery/JVM">JVM</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="kollectivequery::no.acntech.kollectiveq/Filter///PointingToDeclaration//-1969437988">
+  <div class="breadcrumbs"><a href="../../../index.html">kollectivequery</a><span class="delimiter">/</span><a href="../index.html">no.acntech.kollectiveq</a><span class="delimiter">/</span><span class="current">Filter</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Filter</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Filter</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/acntech/kollective-query/tree/main/src/main/kotlin/no/acntech/kollectiveq/Filter.kt#L114">source</a>)</span></span></div><p class="paragraph">This class provides filtering functionality on collections with a query string parameter <code class="lang-kotlin">filter</code>. The filter syntax is inspired by MongoDB, made up of predicates containing a property name, an operator, and a value.</p><p class="paragraph">Syntax Example: <code class="lang-kotlin">filter=name$eq:Joe</code> - This matches all persons with the value &quot;Joe&quot; in the 'name' property.</p><p class="paragraph">Predicates can be chained with logical operators AND, OR, and NOT (to negate a predicate).</p><p class="paragraph">Chaining Example: <code class="lang-kotlin">filter=name$eq:Joe$and:city$like:*port$and:country$ne:Norway</code> This matches all persons named Joe, where the city includes 'port' and the country is not Norway.</p><p class="paragraph">String filtering is case-insensitive.</p><p class="paragraph">Operator affinity can be controlled using parentheses.</p><p class="paragraph">Affinity Example: <code class="lang-kotlin">filter=name$eq:Joe$and:$not:(city$like:*port$or:age$lt:40)</code> This matches all persons named Joe where the city does not include 'port' or age is less than 40.</p><p class="paragraph">All filter strings should be URL encoded.</p><p class="paragraph">The class supports the following filter operators:</p><ul><li><p class="paragraph">Equals (<code class="lang-kotlin">$eq:</code>)</p></li><li><p class="paragraph">Not equals (<code class="lang-kotlin">$ne:</code>)</p></li><li><p class="paragraph">Greater than (<code class="lang-kotlin">$gt:</code>)</p></li><li><p class="paragraph">Greater than or equal (<code class="lang-kotlin">$gte:</code>)</p></li><li><p class="paragraph">Less than (<code class="lang-kotlin">$lt:</code>)</p></li><li><p class="paragraph">Less than or equal (<code class="lang-kotlin">$lte:</code>)</p></li><li><p class="paragraph">Is NULL (<code class="lang-kotlin">$null:</code>)</p></li><li><p class="paragraph">Is NOT NULL (<code class="lang-kotlin">$nnull:</code>)</p></li><li><p class="paragraph">Substring match (<code class="lang-kotlin">$like:</code>)</p></li><li><p class="paragraph">Logical AND (<code class="lang-kotlin">$and:</code>)</p></li><li><p class="paragraph">Logical OR (<code class="lang-kotlin">$or:</code>)</p></li><li><p class="paragraph">Logical NOT (<code class="lang-kotlin">$not:</code>)</p></li><li><p class="paragraph">In a list (<code class="lang-kotlin">$in:</code>)</p></li><li><p class="paragraph">Not in a list (<code class="lang-kotlin">$nin:</code>)</p></li><li><p class="paragraph">Having a relational condition (<code class="lang-kotlin">$having:(&lt;relationship-field&gt;&lt;operator&gt;&lt;value&gt;)</code>)</p></li><li><p class="paragraph">Having a relational function condition (<code class="lang-kotlin">$having:FUNCTION(&lt;field.subfield&gt;)&lt;operator&gt;&lt;value&gt;</code>) where FUNCTION is one of COUNT, SUM, AVG, MIN, MAX</p></li></ul><p class="paragraph">The <code class="lang-kotlin">$having:</code> (without a function) operator is used to filter by a condition on a one-to-many or many-to-many relationship. Example: On the /departments/ endpoint: filter=$having:employees(name$eq:John) - matches all departments with an employee named John.</p><p class="paragraph">The <code class="lang-kotlin">$having:FUNCTION</code> operator is used to filter by a conditional function on a one-to-many or many-to-many relationship. Example 1: On the /departments/ endpoint: filter=$having:COUNT(employees)$gt:10 - matches all departments with more than 10 employees. Example 2: On the /departments/ endpoint: filter=$having:AVG(employees.salary)$gt:500000 - matches all departments where the average salary is greater than 100.000</p><p class="paragraph">Note that the <code class="lang-kotlin">$having:</code> operator does <i>not</i> support nesting - it is only intended to be used on the top level of a filter.</p><p class="paragraph">The <code class="lang-kotlin">$like:</code> operator supports wildcards for multi-character (*) and single-character (?) matches. Note that string comparisons are (normally) done lowercase, depending on the underlying database support.</p><p class="paragraph">Example: <code class="lang-kotlin">filter=name$like:K*so?</code> - matches all resources with a name starting with &quot;K&quot;, then s sequence of random characters, ending with &quot;so&quot; followed by any single character.</p><p class="paragraph">If no wildcard is present, the string will be prefixed and suffixed with a (*), effectively turning it into a &quot;contains&quot; expression.</p><p class="paragraph">Null values can be filtered using <code class="lang-kotlin">$null:</code> and <code class="lang-kotlin">$nnull:</code>.</p><p class="paragraph">Time-related values support various UTC-based formats for filtering. Specific time fields can be extracted for comparison.</p><p class="paragraph">The <code class="lang-kotlin">$in:</code> and <code class="lang-kotlin">$nin:</code> operators are used to filter by a list of values, which must be enclosed in brackets.</p><p class="paragraph">Examples of time field filtering:</p><ul><li><p class="paragraph"><code class="lang-kotlin">filter=birth_date$eq:01-25</code> matches all resources with a birthdate on January 25th.</p></li><li><p class="paragraph"><code class="lang-kotlin">filter=birth_date$gte:1995--</code> matches all resources born in or after 1995.</p></li><li><p class="paragraph"><code class="lang-kotlin">filter=last_login$gte:12:15:00</code> matches all resources who last logged in after 12:15:00.</p></li><li><p class="paragraph"><code class="lang-kotlin">filter=last_login$gte:2023-01-01T00:00:00Z</code> matches all resources who last logged in after 2023-01-01T00:00:00Z.</p></li><li><p class="paragraph"><code class="lang-kotlin">filter=last_login$gte:2023-11-02T15:22:45.123+0200</code> matches all resources who last logged in after 2023-11-02T15:22:45.123+0200.</p></li><li><p class="paragraph"><code class="lang-kotlin">filter=last_login$gte:2023-11-02T15:22[America/New_York]</code> matches all resources who last logged in after 2023-11-02T15:22 in the America/New_York timezone.</p></li></ul><p class="paragraph">Special characters are escaped with a dollar sign ($). Special characters include:</p><ul><li><p class="paragraph">The escape char itself: '$'</p></li><li><p class="paragraph">Asterisk: '*'</p></li><li><p class="paragraph">Question mark: '?'</p></li><li><p class="paragraph">Left parenthesis: '('</p></li><li><p class="paragraph">Right parenthesis: ')'</p></li><li><p class="paragraph">Comma: ','</p></li><li><p class="paragraph">Left bracket: '['</p></li><li><p class="paragraph">Right bracket: ']'</p></li><li><p class="paragraph">Colon: ':'</p></li><li><p class="paragraph">Hyphen: '-'</p></li><li><p class="paragraph">Space: ' '</p></li></ul><p class="paragraph">Note that after escpaping is resolved, literal wildcards (<i>) and (?) are escaped with (</i>) and (?), respectively.</p><p class="paragraph">Example: <code class="lang-kotlin">filter=some_attribute$like:K$*soL$?p?</code> becomes <code class="lang-kotlin">filter=name$like:K**soL??p?</code></p><p class="paragraph">This is done to prepare the string for LIKE or language specific regular expressions in the target query language.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="1246849886%2FClasslikes%2F-1969437988" anchor-label="Companion" id="1246849886%2FClasslikes%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246849886%2FClasslikes%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-723714001%2FClasslikes%2F-1969437988" anchor-label="Condition" id="-723714001%2FClasslikes%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-condition/index.html"><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-723714001%2FClasslikes%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-condition/index.html">Condition</a></div><div class="brief "><p class="paragraph">Represents a condition used in filtering data.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-153288652%2FClasslikes%2F-1969437988" anchor-label="Operator" id="-153288652%2FClasslikes%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-operator/index.html"><span><span>Operator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-153288652%2FClasslikes%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-operator/index.html">Operator</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-operator/index.html">Filter.Operator</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1285328153%2FClasslikes%2F-1969437988" anchor-label="Value" id="1285328153%2FClasslikes%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-value/index.html"><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1285328153%2FClasslikes%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-value/index.html">Value</a><span class="token operator">&lt;</span><span class="token keyword">out </span><a href="-value/index.html">V</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Represents a sealed class <code class="lang-kotlin">Value</code> that can hold different types of values.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="2069567710%2FProperties%2F-1969437988" anchor-label="rootCondition" id="2069567710%2FProperties%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="root-condition.html"><span>root</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2069567710%2FProperties%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">val </span><a href="root-condition.html">rootCondition</a><span class="token operator">: </span><a href="-condition/index.html">Filter.Condition</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1863303745%2FFunctions%2F-1969437988" anchor-label="accept" id="1863303745%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="accept.html"><span><span>accept</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1863303745%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="accept.html"><span class="token function">accept</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">visitor<span class="token operator">: </span><a href="../-filter-visitor/index.html">FilterVisitor</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Accepts a visitor to perform operations on the root condition of the Filter.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1984726176%2FFunctions%2F-1969437988" anchor-label="asString" id="1984726176%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="as-string.html"><span>as</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1984726176%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="as-string.html"><span class="token function">asString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the string representation of the <code class="lang-kotlin">Filter</code> object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-716343015%2FFunctions%2F-1969437988" anchor-label="compactPrint" id="-716343015%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="compact-print.html"><span>compact</span><wbr></wbr><span><span>Print</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-716343015%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="compact-print.html"><span class="token function">compactPrint</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Executes the <code class="lang-kotlin">compactPrint</code> operation, which generates a compact string representation of a <code class="lang-kotlin">Filter</code> object based on the provided <code class="lang-kotlin">FilterPrintVisitor</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-228595808%2FFunctions%2F-1969437988" anchor-label="prettyPrint" id="-228595808%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pretty-print.html"><span>pretty</span><wbr></wbr><span><span>Print</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-228595808%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="pretty-print.html"><span class="token function">prettyPrint</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a formatted string representation of the Filter object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1118657519%2FFunctions%2F-1969437988" anchor-label="toHttpParameter" id="-1118657519%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-http-parameter.html"><span>to</span><wbr></wbr><span>Http</span><wbr></wbr><span><span>Parameter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1118657519%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-http-parameter.html"><span class="token function">toHttpParameter</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Converts the given value to an HTTP query parameter string.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1399949001%2FFunctions%2F-1969437988" anchor-label="toString" id="-1399949001%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1399949001%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
