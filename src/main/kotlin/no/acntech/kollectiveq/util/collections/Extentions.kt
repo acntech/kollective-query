@@ -1,8 +1,8 @@
-package no.acntech.kollectiveq.collections
+package no.acntech.kollectiveq.util.collections
 
-import no.acntech.kollectiveq.text.EMPTY_STRING
-import no.acntech.kollectiveq.text.NEW_LINE
-import no.acntech.kollectiveq.text.SPACE
+import no.acntech.kollectiveq.util.text.EMPTY_STRING
+import no.acntech.kollectiveq.util.text.NEW_LINE
+import no.acntech.kollectiveq.util.text.SPACE
 
 fun List<*>.prettyPrint(indentation: Int = 0): String {
    val indent = SPACE.repeat(indentation)

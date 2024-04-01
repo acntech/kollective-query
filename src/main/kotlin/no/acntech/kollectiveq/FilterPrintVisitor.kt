@@ -1,6 +1,7 @@
 package no.acntech.kollectiveq
 
-import no.acntech.kollectiveq.text.*
+import no.acntech.kollectiveq.FilterPrintVisitor.PrintFormat
+import no.acntech.kollectiveq.util.text.*
 
 /**
  * The FilterPrintVisitor class is responsible for visiting filter conditions and generating a formatted string representation

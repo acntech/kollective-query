@@ -1,4 +1,4 @@
-package no.acntech.kollectiveq.lang
+package no.acntech.kollectiveq.util.lang
 
 /**
  * Thrown to indicate a validation problem.

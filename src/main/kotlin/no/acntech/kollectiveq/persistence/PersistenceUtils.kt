@@ -2,8 +2,8 @@ package no.acntech.kollectiveq.persistence
 
 import jakarta.persistence.*
 import jakarta.persistence.metamodel.*
-import no.acntech.kollectiveq.text.DOT
-import no.acntech.kollectiveq.text.PERIOD
+import no.acntech.kollectiveq.util.text.DOT
+import no.acntech.kollectiveq.util.text.PERIOD
 import java.lang.reflect.Field
 import java.lang.reflect.Member
 import java.lang.reflect.Method

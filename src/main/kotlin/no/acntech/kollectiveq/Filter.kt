@@ -3,9 +3,9 @@ package no.acntech.kollectiveq
 import no.acntech.kollectiveq.antlr4.FilterGrammarBaseVisitor
 import no.acntech.kollectiveq.antlr4.FilterGrammarLexer
 import no.acntech.kollectiveq.antlr4.FilterGrammarParser
-import no.acntech.kollectiveq.text.DetailedParseException
-import no.acntech.kollectiveq.text.EQ
-import no.acntech.kollectiveq.time.FlexibleInstantParser
+import no.acntech.kollectiveq.util.text.EQ
+import no.acntech.kollectiveq.util.time.DetailedParseException
+import no.acntech.kollectiveq.util.time.FlexibleInstantParser
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.RecognitionException
@@ -138,7 +138,6 @@ class Filter {
          }
       }
    }
-
 
 
    /**

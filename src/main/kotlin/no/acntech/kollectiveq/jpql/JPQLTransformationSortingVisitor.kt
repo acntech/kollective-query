@@ -3,12 +3,12 @@ package no.acntech.kollectiveq.jpql
 
 import no.acntech.kollectiveq.Sorting
 import no.acntech.kollectiveq.SortingVisitor
-import no.acntech.kollectiveq.lang.TransformFunction
-import no.acntech.kollectiveq.lang.identityTransform
-import no.acntech.kollectiveq.text.COMMA_SPACE
-import no.acntech.kollectiveq.text.DetailedParseException
-import no.acntech.kollectiveq.text.EMPTY_STRING
-import no.acntech.kollectiveq.text.SPACE
+import no.acntech.kollectiveq.util.lang.TransformFunction
+import no.acntech.kollectiveq.util.lang.identityTransform
+import no.acntech.kollectiveq.util.text.COMMA_SPACE
+import no.acntech.kollectiveq.util.text.EMPTY_STRING
+import no.acntech.kollectiveq.util.text.SPACE
+import no.acntech.kollectiveq.util.time.DetailedParseException
 
 /**
  * Visitor that transforms a [Sorting] to a JPQL ORDER BY clause.

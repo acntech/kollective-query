@@ -4,12 +4,12 @@ import jakarta.persistence.TypedQuery
 import no.acntech.kollectiveq.Filter
 import no.acntech.kollectiveq.Pagination
 import no.acntech.kollectiveq.Sorting
-import no.acntech.kollectiveq.collections.prettyPrint
 import no.acntech.kollectiveq.jpql.JPQLTransformationFilterVisitor
-import no.acntech.kollectiveq.lang.snakeToCamelTransformer
 import no.acntech.kollectiveq.test.app.domain.model.Department
 import no.acntech.kollectiveq.test.app.domain.model.Employee
 import no.acntech.kollectiveq.test.apptest.domain.repostitory.BaseRepositoryTest
+import no.acntech.kollectiveq.util.collections.prettyPrint
+import no.acntech.kollectiveq.util.lang.snakeToCamelTransformer
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
@@ -79,7 +79,7 @@ class MiscRepoTests : BaseRepositoryTest() {
       "'','name\$like:P*\$and:\$having:AVG(employees.year_of_birth)\$gte:2000', '', 'SELECT de_0 FROM Department de_0 WHERE (LOWER(de_0.name) LIKE LOWER('P%') AND de_0.id IN (SELECT em_0.department.id FROM Employee em_0 GROUP BY em_0.department.id HAVING AVG(em_0.yearOfBirth) >= 2000))'",
       "'','\$having:AVG(employees.year_of_birth)\$gte:2000', '', 'SELECT de_0 FROM Department de_0 WHERE de_0.id IN (SELECT em_0.department.id FROM Employee em_0 GROUP BY em_0.department.id HAVING AVG(em_0.yearOfBirth) >= 2000)'",
 
-   )
+      )
    fun testHavingClause(paginationVal: String, filterVal: String, sortVal: String, expectedJpqlQuery: String) {
       // Select all departments that have employees with first name starting with J
       val filter = Filter.of(filterVal, true)
@@ -93,7 +93,7 @@ class MiscRepoTests : BaseRepositoryTest() {
       )
       filter.accept(visitor)
 
-       val query: String = visitor.toQuery()
+      val query: String = visitor.toQuery()
       println("whereClause: ${visitor.toWhereClause()}")
       println("Query: $query")
 

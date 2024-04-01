@@ -1,7 +1,7 @@
-package no.acntech.kollectiveq.lang
+package no.acntech.kollectiveq.util.lang
 
 import com.google.common.base.CaseFormat
-import no.acntech.kollectiveq.collections.prettyPrint
+import no.acntech.kollectiveq.util.collections.prettyPrint
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 

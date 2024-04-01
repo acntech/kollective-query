@@ -1,6 +1,6 @@
 package no.acntech.kollectiveq
 
-import no.acntech.kollectiveq.lang.ValidationException
+import no.acntech.kollectiveq.util.lang.ValidationException
 
 /**
  * This visitor validates that the filter does not contain any conditions that are not allowed.

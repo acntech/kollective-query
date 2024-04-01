@@ -3,7 +3,7 @@ package no.acntech.kollectiveq.test.app.util.json
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
-import no.acntech.kollectiveq.time.FlexibleInstantParser
+import no.acntech.kollectiveq.util.time.FlexibleInstantParser
 import java.time.Instant
 import java.time.format.DateTimeParseException
 

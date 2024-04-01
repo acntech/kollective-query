@@ -1,6 +1,6 @@
 package no.acntech.kollectiveq
 
-import no.acntech.kollectiveq.text.EQUALS
+import no.acntech.kollectiveq.util.text.EQUALS
 import org.springframework.web.util.UriUtils
 import java.nio.charset.StandardCharsets
 

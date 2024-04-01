@@ -1,4 +1,4 @@
-package no.acntech.kollectiveq.time
+package no.acntech.kollectiveq.util.time
 
 /**
  * Parses a string into an [Instant] using a highly flexible formatter (parser) supporting a wide range of formats.

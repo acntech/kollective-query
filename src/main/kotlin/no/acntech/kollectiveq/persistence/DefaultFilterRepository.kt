@@ -6,9 +6,9 @@ import no.acntech.kollectiveq.Pagination
 import no.acntech.kollectiveq.Sorting
 import no.acntech.kollectiveq.jpql.JPQLTransformationFilterVisitor
 import no.acntech.kollectiveq.jpql.JPQLTransformationSortingVisitor
-import no.acntech.kollectiveq.lang.TransformFunction
-import no.acntech.kollectiveq.lang.snakeToCamelTransformer
-import no.acntech.kollectiveq.text.EMPTY_STRING
+import no.acntech.kollectiveq.util.lang.TransformFunction
+import no.acntech.kollectiveq.util.lang.snakeToCamelTransformer
+import no.acntech.kollectiveq.util.text.EMPTY_STRING
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl

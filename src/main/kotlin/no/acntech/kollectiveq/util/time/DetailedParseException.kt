@@ -1,4 +1,4 @@
-package no.acntech.kollectiveq.text
+package no.acntech.kollectiveq.util.time
 
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle

@@ -1,6 +1,7 @@
 package no.acntech.kollectiveq
 
-import no.acntech.kollectiveq.text.*
+import no.acntech.kollectiveq.util.text.*
+import no.acntech.kollectiveq.util.time.DetailedParseException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.util.UriUtils

@@ -1,4 +1,4 @@
-package no.acntech.kollectiveq.text
+package no.acntech.kollectiveq.util.text
 
 const val EMPTY_STRING = ""
 

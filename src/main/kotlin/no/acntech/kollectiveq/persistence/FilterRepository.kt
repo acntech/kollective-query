@@ -4,8 +4,8 @@ import com.google.common.base.CaseFormat
 import no.acntech.kollectiveq.Filter
 import no.acntech.kollectiveq.Pagination
 import no.acntech.kollectiveq.Sorting
-import no.acntech.kollectiveq.lang.TransformFunction
-import no.acntech.kollectiveq.lang.createCaseFormatTransformFunction
+import no.acntech.kollectiveq.util.lang.TransformFunction
+import no.acntech.kollectiveq.util.lang.createCaseFormatTransformFunction
 import org.springframework.data.domain.Page
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.NoRepositoryBean
