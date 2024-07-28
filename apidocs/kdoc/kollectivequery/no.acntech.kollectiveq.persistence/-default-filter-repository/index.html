@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DefaultFilterRepository</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            kollectivequery
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter="kollectivequery/JVM">JVM</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="kollectivequery::no.acntech.kollectiveq.persistence/DefaultFilterRepository///PointingToDeclaration//-1969437988">
+  <div class="breadcrumbs"><a href="../../../index.html">kollectivequery</a><span class="delimiter">/</span><a href="../index.html">no.acntech.kollectiveq.persistence</a><span class="delimiter">/</span><span class="current">DefaultFilterRepository</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Default</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Repository</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">DefaultFilterRepository</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><a href="index.html">ID</a><span class="token operator"> : </span><a href="https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html">Serializable</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entityInformation<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.repository.support/JpaEntityInformation///PointingToDeclaration/">JpaEntityInformation</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html">ID</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">entityManager<span class="token operator">: </span><span data-unresolved-link="jakarta.persistence/EntityManager///PointingToDeclaration/">EntityManager</span></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="org.springframework.data.jpa.repository.support/SimpleJpaRepository///PointingToDeclaration/">SimpleJpaRepository</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html">ID</a><span class="token operator">&gt; </span>, <a href="../-filter-repository/index.html">FilterRepository</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html">ID</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/acntech/kollective-query/tree/main/src/main/kotlin/no/acntech/kollectiveq/persistence/DefaultFilterRepository.kt#L32">source</a>)</span></span></div><p class="paragraph">Represents the default implementation of the FilterRepository interface.</p><p>
+This is the class users of the DSL will normayy interact with when they want to filter entities. All the filtering logic is
+implemented here.<h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>T</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the entity type</p></div></div></div></div><div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>ID</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the ID type of the entity</p></div></div></div></div><div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>entity</span><wbr></wbr><span><span>Information</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the JpaEntityInformation object that provides metadata about the entity</p></div></div></div></div><div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>entity</span><wbr></wbr><span><span>Manager</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the EntityManager used to interact with the database</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-1061014555%2FConstructors%2F-1969437988" anchor-label="DefaultFilterRepository" id="-1061014555%2FConstructors%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-default-filter-repository.html"><span>Default</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Repository</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1061014555%2FConstructors%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entityInformation<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.repository.support/JpaEntityInformation///PointingToDeclaration/">JpaEntityInformation</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html">ID</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">entityManager<span class="token operator">: </span><span data-unresolved-link="jakarta.persistence/EntityManager///PointingToDeclaration/">EntityManager</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a DefaultFilterRepository with the specified entity information and entity manager.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-962034180%2FClasslikes%2F-1969437988" anchor-label="Companion" id="-962034180%2FClasslikes%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-962034180%2FClasslikes%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1436246782%2FFunctions%2F-1969437988" anchor-label="count" id="1436246782%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-619274786%2FFunctions%2F-1969437988"><span><span>count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1436246782%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-619274786%2FFunctions%2F-1969437988"><span class="token function">count</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#881728300%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#881728300%2FFunctions%2F-1969437988"><span class="token function">count</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#881728300%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-66285236%2FFunctions%2F-1969437988"><span class="token function">count</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.lang/Nullable///PointingToDeclaration/"><span class="token annotation builtin">Nullable</span></span> </span>spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="490975307%2FFunctions%2F-1969437988" anchor-label="delete" id="490975307%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-2016743281%2FFunctions%2F-1969437988"><span><span>delete</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="490975307%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-2016743281%2FFunctions%2F-1969437988"><span class="token function">delete</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-158311032%2FFunctions%2F-1969437988"><span class="token function">delete</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.lang/Nullable///PointingToDeclaration/"><span class="token annotation builtin">Nullable</span></span> </span>spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-463469215%2FFunctions%2F-1969437988" anchor-label="deleteAll" id="-463469215%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#86372567%2FFunctions%2F-1969437988"><span>delete</span><wbr></wbr><span><span>All</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-463469215%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#86372567%2FFunctions%2F-1969437988"><span class="token function">deleteAll</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-169132074%2FFunctions%2F-1969437988"><span class="token function">deleteAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entities<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="445933600%2FFunctions%2F-1969437988" anchor-label="deleteAllById" id="445933600%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#445933600%2FFunctions%2F-1969437988"><span>delete</span><wbr></wbr><span>All</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="445933600%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#445933600%2FFunctions%2F-1969437988"><span class="token function">deleteAllById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ids<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html">ID</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1566417285%2FFunctions%2F-1969437988" anchor-label="deleteAllByIdInBatch" id="-1566417285%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1566417285%2FFunctions%2F-1969437988"><span>delete</span><wbr></wbr><span>All</span><wbr></wbr><span>By</span><wbr></wbr><span>Id</span><wbr></wbr><span>In</span><wbr></wbr><span><span>Batch</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1566417285%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1566417285%2FFunctions%2F-1969437988"><span class="token function">deleteAllByIdInBatch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ids<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html">ID</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="340053771%2FFunctions%2F-1969437988" anchor-label="deleteAllInBatch" id="340053771%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#18084366%2FFunctions%2F-1969437988"><span>delete</span><wbr></wbr><span>All</span><wbr></wbr><span>In</span><wbr></wbr><span><span>Batch</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="340053771%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#18084366%2FFunctions%2F-1969437988"><span class="token function">deleteAllInBatch</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#912693069%2FFunctions%2F-1969437988"><span class="token function">deleteAllInBatch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entities<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1294709023%2FFunctions%2F-1969437988" anchor-label="deleteById" id="-1294709023%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1294709023%2FFunctions%2F-1969437988"><span>delete</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1294709023%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1294709023%2FFunctions%2F-1969437988"><span class="token function">deleteById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="index.html">ID</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1939342319%2FFunctions%2F-1969437988" anchor-label="deleteInBatch" id="-1939342319%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1939342319%2FFunctions%2F-1969437988"><span>delete</span><wbr></wbr><span>In</span><wbr></wbr><span><span>Batch</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1939342319%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1939342319%2FFunctions%2F-1969437988"><span class="token function"><strike>deleteInBatch</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entities<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-498607546%2FFunctions%2F-1969437988" anchor-label="exists" id="-498607546%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#517729433%2FFunctions%2F-1969437988"><span><span>exists</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-498607546%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#517729433%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#517729433%2FFunctions%2F-1969437988"><span class="token function">exists</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#517729433%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1868551929%2FFunctions%2F-1969437988"><span class="token function">exists</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1004769584%2FFunctions%2F-1969437988" anchor-label="existsById" id="-1004769584%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1004769584%2FFunctions%2F-1969437988"><span>exists</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1004769584%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1004769584%2FFunctions%2F-1969437988"><span class="token function">existsById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="index.html">ID</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1521489740%2FFunctions%2F-1969437988" anchor-label="findAll" id="-1521489740%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-54348827%2FFunctions%2F-1969437988"><span>find</span><wbr></wbr><span><span>All</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1521489740%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-54348827%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#297939141%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#297939141%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#297939141%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html#297939141%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1928409361%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pageable<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Pageable///PointingToDeclaration/">Pageable</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Page///PointingToDeclaration/">Page</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-8670822%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sort<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Sort///PointingToDeclaration/">Sort</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-841407963%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#267329636%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#267329636%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#267329636%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">pageable<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Pageable///PointingToDeclaration/">Pageable</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Page///PointingToDeclaration/">Page</span><span class="token operator">&lt;</span><a href="index.html#267329636%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#-1916729969%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#-1916729969%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#-1916729969%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">sort<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Sort///PointingToDeclaration/">Sort</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html#-1916729969%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1905212164%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.lang/Nullable///PointingToDeclaration/"><span class="token annotation builtin">Nullable</span></span> </span>spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">pageable<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Pageable///PointingToDeclaration/">Pageable</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Page///PointingToDeclaration/">Page</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#198668335%2FFunctions%2F-1969437988"><span class="token function">findAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.lang/Nullable///PointingToDeclaration/"><span class="token annotation builtin">Nullable</span></span> </span>spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">sort<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Sort///PointingToDeclaration/">Sort</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="760602414%2FFunctions%2F-1969437988" anchor-label="findAllById" id="760602414%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#760602414%2FFunctions%2F-1969437988"><span>find</span><wbr></wbr><span>All</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="760602414%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#760602414%2FFunctions%2F-1969437988"><span class="token function">findAllById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ids<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html">ID</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1883321524%2FFunctions%2F-1969437988" anchor-label="findBy" id="-1883321524%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#750278917%2FFunctions%2F-1969437988"><span>find</span><wbr></wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1883321524%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#750278917%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html#750278917%2FFunctions%2F-1969437988">R</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html#750278917%2FFunctions%2F-1969437988"><span class="token function">findBy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#750278917%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">queryFunction<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html">Function</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.data.repository.query/FluentQuery.FetchableFluentQuery///PointingToDeclaration/">FluentQuery.FetchableFluentQuery</span><span class="token operator">&lt;</span><a href="index.html#750278917%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span><a href="index.html#750278917%2FFunctions%2F-1969437988">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#750278917%2FFunctions%2F-1969437988">R</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#936290725%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html#936290725%2FFunctions%2F-1969437988">R</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html#936290725%2FFunctions%2F-1969437988"><span class="token function">findBy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">queryFunction<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html">Function</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.data.repository.query/FluentQuery.FetchableFluentQuery///PointingToDeclaration/">FluentQuery.FetchableFluentQuery</span><span class="token operator">&lt;</span><a href="index.html#936290725%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span><a href="index.html#936290725%2FFunctions%2F-1969437988">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#936290725%2FFunctions%2F-1969437988">R</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2042090387%2FFunctions%2F-1969437988" anchor-label="findById" id="2042090387%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#2042090387%2FFunctions%2F-1969437988"><span>find</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2042090387%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#2042090387%2FFunctions%2F-1969437988"><span class="token function">findById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="index.html">ID</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">Optional</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2028571500%2FFunctions%2F-1969437988" anchor-label="findOne" id="2028571500%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1949717770%2FFunctions%2F-1969437988"><span>find</span><wbr></wbr><span><span>One</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2028571500%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#1949717770%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#1949717770%2FFunctions%2F-1969437988"><span class="token function">findOne</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">example<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Example///PointingToDeclaration/">Example</span><span class="token operator">&lt;</span><a href="index.html#1949717770%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">Optional</a><span class="token operator">&lt;</span><a href="index.html#1949717770%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-440670038%2FFunctions%2F-1969437988"><span class="token function">findOne</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">spec<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.domain/Specification///PointingToDeclaration/">Specification</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">Optional</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1771200905%2FFunctions%2F-1969437988" anchor-label="flush" id="1771200905%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1771200905%2FFunctions%2F-1969437988"><span><span>flush</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1771200905%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1771200905%2FFunctions%2F-1969437988"><span class="token function">flush</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1810227894%2FFunctions%2F-1969437988" anchor-label="getById" id="1810227894%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1810227894%2FFunctions%2F-1969437988"><span>get</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1810227894%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1810227894%2FFunctions%2F-1969437988"><span class="token function"><strike>getById</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="index.html">ID</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1633983001%2FFunctions%2F-1969437988" anchor-label="getEntities" id="1633983001%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-entities.html"><span>get</span><wbr></wbr><span><span>Entities</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1633983001%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="get-entities.html"><span class="token function">getEntities</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pagination<span class="token operator">: </span><a href="../../no.acntech.kollectiveq/-pagination/index.html">Pagination</a><span class="token punctuation">, </span></span><span class="parameter ">filter<span class="token operator">: </span><a href="../../no.acntech.kollectiveq/-filter/index.html">Filter</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">sorting<span class="token operator">: </span><a href="../../no.acntech.kollectiveq/-sorting/index.html">Sorting</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">fieldTransformer<span class="token operator">: </span><a href="../../no.acntech.kollectiveq.util.lang/-transform-function/index.html">TransformFunction</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.springframework.data.domain/Page///PointingToDeclaration/">Page</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1056323026%2FFunctions%2F-1969437988" anchor-label="getOne" id="-1056323026%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1056323026%2FFunctions%2F-1969437988"><span>get</span><wbr></wbr><span><span>One</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1056323026%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1056323026%2FFunctions%2F-1969437988"><span class="token function"><strike>getOne</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="index.html">ID</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1660833225%2FFunctions%2F-1969437988" anchor-label="getReferenceById" id="-1660833225%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1660833225%2FFunctions%2F-1969437988"><span>get</span><wbr></wbr><span>Reference</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1660833225%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1660833225%2FFunctions%2F-1969437988"><span class="token function">getReferenceById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="index.html">ID</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="911267945%2FFunctions%2F-1969437988" anchor-label="save" id="911267945%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#911267945%2FFunctions%2F-1969437988"><span><span>save</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="911267945%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#911267945%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#911267945%2FFunctions%2F-1969437988"><span class="token function">save</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="index.html#911267945%2FFunctions%2F-1969437988">S</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#911267945%2FFunctions%2F-1969437988">S</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-414554692%2FFunctions%2F-1969437988" anchor-label="saveAll" id="-414554692%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-414554692%2FFunctions%2F-1969437988"><span>save</span><wbr></wbr><span><span>All</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-414554692%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#-414554692%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#-414554692%2FFunctions%2F-1969437988"><span class="token function">saveAll</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entities<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html#-414554692%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html#-414554692%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1827035505%2FFunctions%2F-1969437988" anchor-label="saveAllAndFlush" id="-1827035505%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1827035505%2FFunctions%2F-1969437988"><span>save</span><wbr></wbr><span>All</span><wbr></wbr><span>And</span><wbr></wbr><span><span>Flush</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1827035505%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#-1827035505%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#-1827035505%2FFunctions%2F-1969437988"><span class="token function">saveAllAndFlush</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entities<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a><span class="token operator">&lt;</span><a href="index.html#-1827035505%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html#-1827035505%2FFunctions%2F-1969437988">S</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="568946620%2FFunctions%2F-1969437988" anchor-label="saveAndFlush" id="568946620%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#568946620%2FFunctions%2F-1969437988"><span>save</span><wbr></wbr><span>And</span><wbr></wbr><span><span>Flush</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="568946620%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.transaction.annotation/Transactional///PointingToDeclaration/"><span class="token annotation builtin">Transactional</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#568946620%2FFunctions%2F-1969437988">S</a><span class="token operator"> : </span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="index.html#568946620%2FFunctions%2F-1969437988"><span class="token function">saveAndFlush</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="index.html#568946620%2FFunctions%2F-1969437988">S</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#568946620%2FFunctions%2F-1969437988">S</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1555316147%2FFunctions%2F-1969437988" anchor-label="setEscapeCharacter" id="-1555316147%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1555316147%2FFunctions%2F-1969437988"><span>set</span><wbr></wbr><span>Escape</span><wbr></wbr><span><span>Character</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1555316147%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1555316147%2FFunctions%2F-1969437988"><span class="token function">setEscapeCharacter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">escapeCharacter<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.repository.query/EscapeCharacter///PointingToDeclaration/">EscapeCharacter</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1215846667%2FFunctions%2F-1969437988" anchor-label="setProjectionFactory" id="-1215846667%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1215846667%2FFunctions%2F-1969437988"><span>set</span><wbr></wbr><span>Projection</span><wbr></wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1215846667%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1215846667%2FFunctions%2F-1969437988"><span class="token function">setProjectionFactory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">projectionFactory<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.projection/ProjectionFactory///PointingToDeclaration/">ProjectionFactory</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1849502000%2FFunctions%2F-1969437988" anchor-label="setRepositoryMethodMetadata" id="-1849502000%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1849502000%2FFunctions%2F-1969437988"><span>set</span><wbr></wbr><span>Repository</span><wbr></wbr><span>Method</span><wbr></wbr><span><span>Metadata</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1849502000%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1849502000%2FFunctions%2F-1969437988"><span class="token function">setRepositoryMethodMetadata</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">metadata<span class="token operator">: </span><span data-unresolved-link="org.springframework.data.jpa.repository.support/CrudMethodMetadata///PointingToDeclaration/">CrudMethodMetadata</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

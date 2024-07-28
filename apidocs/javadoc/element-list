@@ -1,0 +1,39 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:no.acntech.kollectiveq/Filter.Companion///PointingToDeclaration/no/acntech/kollectiveq/Filter.Companion.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.ConditionGroup///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.ConditionGroup.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.HavingCondition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.HavingCondition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.HavingFunctionCondition.Function///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.HavingFunctionCondition.Function.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.HavingFunctionCondition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.HavingFunctionCondition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.InListCondition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.InListCondition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.NotCondition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.NotCondition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.NotInListCondition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.NotInListCondition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition.SimpleCondition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.SimpleCondition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Condition///PointingToDeclaration/no/acntech/kollectiveq/Filter.Condition.html
+$dokka.location:no.acntech.kollectiveq/Filter.Operator.Companion///PointingToDeclaration/no/acntech/kollectiveq/Filter.Operator.Companion.html
+$dokka.location:no.acntech.kollectiveq/Filter.Operator///PointingToDeclaration/no/acntech/kollectiveq/Filter.Operator.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.BooleanValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.BooleanValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.DateTimeValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.DateTimeValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.DateValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.DateValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.DoubleValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.DoubleValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.LongValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.LongValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.MonthDayValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.MonthDayValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.StringValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.StringValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.TimeValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.TimeValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.UtcDateTimeValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.UtcDateTimeValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value.YearValue///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.YearValue.html
+$dokka.location:no.acntech.kollectiveq/Filter.Value///PointingToDeclaration/no/acntech/kollectiveq/Filter.Value.html
+$dokka.location:no.acntech.kollectiveq/FilterPrintVisitor.PrintFormat///PointingToDeclaration/no/acntech/kollectiveq/FilterPrintVisitor.PrintFormat.html
+$dokka.location:no.acntech.kollectiveq/Pagination.Companion///PointingToDeclaration/no/acntech/kollectiveq/Pagination.Companion.html
+$dokka.location:no.acntech.kollectiveq/Sorting.Companion///PointingToDeclaration/no/acntech/kollectiveq/Sorting.Companion.html
+$dokka.location:no.acntech.kollectiveq/Sorting.Direction.Companion///PointingToDeclaration/no/acntech/kollectiveq/Sorting.Direction.Companion.html
+$dokka.location:no.acntech.kollectiveq/Sorting.Direction///PointingToDeclaration/no/acntech/kollectiveq/Sorting.Direction.html
+$dokka.location:no.acntech.kollectiveq/Sorting.SortCriterion///PointingToDeclaration/no/acntech/kollectiveq/Sorting.SortCriterion.html
+no.acntech.kollectiveq
+no.acntech.kollectiveq.jpql
+no.acntech.kollectiveq.persistence
+no.acntech.kollectiveq.util.collections
+no.acntech.kollectiveq.util.lang
+no.acntech.kollectiveq.util.text
+no.acntech.kollectiveq.util.time
+

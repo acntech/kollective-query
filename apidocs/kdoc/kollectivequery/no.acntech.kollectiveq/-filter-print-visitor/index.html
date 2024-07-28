@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>FilterPrintVisitor</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            kollectivequery
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter="kollectivequery/JVM">JVM</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="kollectivequery::no.acntech.kollectiveq/FilterPrintVisitor///PointingToDeclaration//-1969437988">
+  <div class="breadcrumbs"><a href="../../../index.html">kollectivequery</a><span class="delimiter">/</span><a href="../index.html">no.acntech.kollectiveq</a><span class="delimiter">/</span><span class="current">FilterPrintVisitor</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Filter</span><wbr></wbr><span>Print</span><wbr></wbr><span><span>Visitor</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">FilterPrintVisitor</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">format<span class="token operator">: </span><a href="-print-format/index.html">FilterPrintVisitor.PrintFormat</a><span class="token operator"> = </span>PrintFormat.PRETTY<span class="token punctuation">, </span></span><span class="parameter ">indentSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">4</span></span></span><span class="token punctuation">)</span> : <a href="../-filter-base-visitor/index.html">FilterBaseVisitor</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/acntech/kollective-query/tree/main/src/main/kotlin/no/acntech/kollectiveq/FilterPrintVisitor.kt#L13">source</a>)</span></span></div><p class="paragraph">The FilterPrintVisitor class is responsible for visiting filter conditions and generating a formatted string representation of the conditions.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="1786614865%2FConstructors%2F-1969437988" anchor-label="FilterPrintVisitor" id="1786614865%2FConstructors%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-filter-print-visitor.html"><span>Filter</span><wbr></wbr><span>Print</span><wbr></wbr><span><span>Visitor</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1786614865%2FConstructors%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">format<span class="token operator">: </span><a href="-print-format/index.html">FilterPrintVisitor.PrintFormat</a><span class="token operator"> = </span>PrintFormat.PRETTY<span class="token punctuation">, </span></span><span class="parameter ">indentSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">4</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="1945006373%2FClasslikes%2F-1969437988" anchor-label="PrintFormat" id="1945006373%2FClasslikes%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-print-format/index.html"><span>Print</span><wbr></wbr><span><span>Format</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1945006373%2FClasslikes%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-print-format/index.html">PrintFormat</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-print-format/index.html">FilterPrintVisitor.PrintFormat</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-935107767%2FFunctions%2F-1969437988" anchor-label="print" id="-935107767%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="print.html"><span><span>print</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-935107767%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="print.html"><span class="token function">print</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1613100392%2FFunctions%2F-1969437988" anchor-label="toString" id="-1613100392%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1613100392%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1486306088%2FFunctions%2F-1969437988" anchor-label="visit" id="1486306088%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-filter-base-visitor/visit.html"><span><span>visit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1486306088%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-filter-base-visitor/visit.html"><span class="token function">visit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/index.html">Filter.Condition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-428114186%2FFunctions%2F-1969437988" anchor-label="visitConditionGroup" id="-428114186%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="visit-condition-group.html"><span>visit</span><wbr></wbr><span>Condition</span><wbr></wbr><span><span>Group</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-428114186%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="visit-condition-group.html"><span class="token function">visitConditionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">conditionGroup<span class="token operator">: </span><a href="../-filter/-condition/-condition-group/index.html">Filter.Condition.ConditionGroup</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Default implementation visits all conditions in the group.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1824431538%2FFunctions%2F-1969437988" anchor-label="visitHavingCondition" id="-1824431538%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-filter-base-visitor/visit-having-condition.html"><span>visit</span><wbr></wbr><span>Having</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1824431538%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-filter-base-visitor/visit-having-condition.html"><span class="token function">visitHavingCondition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/-having-condition/index.html">Filter.Condition.HavingCondition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-954408370%2FFunctions%2F-1969437988" anchor-label="visitHavingFunctionCondition" id="-954408370%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-filter-base-visitor/visit-having-function-condition.html"><span>visit</span><wbr></wbr><span>Having</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-954408370%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-filter-base-visitor/visit-having-function-condition.html"><span class="token function">visitHavingFunctionCondition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/-having-function-condition/index.html">Filter.Condition.HavingFunctionCondition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="777105504%2FFunctions%2F-1969437988" anchor-label="visitInListCondition" id="777105504%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="visit-in-list-condition.html"><span>visit</span><wbr></wbr><span>In</span><wbr></wbr><span>List</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="777105504%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="visit-in-list-condition.html"><span class="token function">visitInListCondition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/-in-list-condition/index.html">Filter.Condition.InListCondition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1490998812%2FFunctions%2F-1969437988" anchor-label="visitNotCondition" id="1490998812%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-filter-base-visitor/visit-not-condition.html"><span>visit</span><wbr></wbr><span>Not</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1490998812%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-filter-base-visitor/visit-not-condition.html"><span class="token function">visitNotCondition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/-not-condition/index.html">Filter.Condition.NotCondition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-121337420%2FFunctions%2F-1969437988" anchor-label="visitNotInListCondition" id="-121337420%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="visit-not-in-list-condition.html"><span>visit</span><wbr></wbr><span>Not</span><wbr></wbr><span>In</span><wbr></wbr><span>List</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-121337420%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="visit-not-in-list-condition.html"><span class="token function">visitNotInListCondition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/-not-in-list-condition/index.html">Filter.Condition.NotInListCondition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1062104256%2FFunctions%2F-1969437988" anchor-label="visitSimpleCondition" id="-1062104256%2FFunctions%2F-1969437988" data-filterable-set="kollectivequery/JVM"></a>
+          <div class="table-row" data-filterable-current="kollectivequery/JVM" data-filterable-set="kollectivequery/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="visit-simple-condition.html"><span>visit</span><wbr></wbr><span>Simple</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1062104256%2FFunctions%2F-1969437988"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="kollectivequery/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="visit-simple-condition.html"><span class="token function">visitSimpleCondition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="../-filter/-condition/-simple-condition/index.html">Filter.Condition.SimpleCondition</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
