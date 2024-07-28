@@ -482,11 +482,11 @@
 
                 // Add only compile, runtime, or no-scope dependencies
                 List<Dependency> dependencies = model.dependencies.findAll { dep ->
-                    dep.scope in ['compile', 'runtime', null]
+                    dep.scope in ['compile', 'runtime', null] && !dep.groupId.startsWith('org.springframework.boot')
                 }.collect { dep ->
                     // Interpolate version for each dependency
                     String version
-                    if (dep.version.contains('${') && dep.version.contains('}')) {
+                    if (dep.version != null && dep.version.contains('${') && dep.version.contains('}')) {
                         String versionKey = dep.version.replaceAll(/[\$\{\}]/, '')
                         // use resolution from model.properties first, then try System.properties
                         version = model.properties.getProperty(versionKey) ?: System.properties[versionKey] ?: dep.version
@@ -517,16 +517,19 @@
             <artifactId>maven-model</artifactId>
             <version>3.9.8</version>
           </dependency>
+
           <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-model-builder</artifactId>
             <version>3.9.8</version>
           </dependency>
+
           <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
             <version>4.0.1</version>
           </dependency>
+
           <dependency>
             <groupId>org.apache.maven.shared</groupId>
             <artifactId>maven-shared-utils</artifactId>

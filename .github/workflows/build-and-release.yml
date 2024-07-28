@@ -14,6 +14,7 @@ jobs:
     outputs:
       VERSION_TAG: ${{ steps.version_info.outputs.VERSION_TAG }}
       PROJECT_VERSION: ${{ steps.version_info.outputs.PROJECT_VERSION }}
+      SPRING_BOOT_VERSION: ${{ steps.version_info.outputs.SPRING_BOOT_VERSION }}
 
     steps:
       - uses: actions/checkout@v3
@@ -61,8 +62,11 @@ jobs:
           echo "-----> Tagging version: $VERSION_TAG"
           git tag "$VERSION_TAG"
           git push origin "$VERSION_TAG"
+          echo "-----> Extracting Spring Boot version"
+          SPRING_BOOT_VERSION=$(mvn help:evaluate -Dexpression=spring-boot-dependencies.version -q -DforceStdout)
           echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
           echo "PROJECT_VERSION=$PROJECT_VERSION" >> $GITHUB_OUTPUT
+          echo "SPRING_BOOT_VERSION=$SPRING_BOOT_VERSION" >> $GITHUB_OUTPUT
 
       - name: Upload JAR file
         uses: actions/upload-artifact@v2
@@ -192,9 +196,22 @@ jobs:
             ```
             
             ## Gradle/Maven Dependency
+            Note that the Spring Boot version for Spring Boot dependencies used in this release is ${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}.
+            
             For Gradle, add this to your `build.gradle` file's dependencies block: 
             ```groovy
             implementation 'no.acntech.kollectivequery:kollectivequery:${{ needs.build-application.outputs.PROJECT_VERSION }}'
+            implementation 'org.springframework.boot:spring-boot-starter-web'
+            implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+            implementation 'org.springframework.boot:spring-boot-starter-logging'
+            ```
+            
+            For managing Spring Boot version:
+            ```groovy
+            plugins {
+              id 'org.springframework.boot' version '${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}'
+              id 'io.spring.dependency-management' version '1.1.6'
+            }           
             ```
             
             For Maven, add this to your `pom.xml` file's dependencies block:
@@ -204,6 +221,46 @@ jobs:
               <artifactId>kollectivequery</artifactId>
               <version>${{ needs.build-application.outputs.PROJECT_VERSION }}</version>
             </dependency>
+            
+            <!-- Include the following Spring Boot Starter dependencies -->
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-jpa</artifactId>
+            </dependency>
+            
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-logging</artifactId>
+            </dependency>
+            ```
+            
+            For managing Spring Boot version, either use a parent POM:
+            ```xml
+            <parent>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-parent</artifactId>
+              <version>${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}</version>
+            </parent>
+            ```
+            
+            Or, define the spring boot dependencies in the `dependencyManagement` section:
+            ```xml
+            <dependencyManagement>
+              <dependencies>
+                <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-dependencies</artifactId>
+                  <version>${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}</version>
+                  <type>pom</type>
+                  <scope>import</scope>
+                </dependency>
+              </dependencies>
+            </dependencyManagement>
             ```
 
           draft: false
