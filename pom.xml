@@ -23,23 +23,23 @@
     <revision>SNAPSHOT</revision>
 
     <!-- Library versions -->
-    <spring-boot-dependencies.version>3.2.4</spring-boot-dependencies.version>
-    <h2.version>2.2.224</h2.version>
-    <commons.lang3.version>3.14.0</commons.lang3.version>
-    <guava.version>33.1.0-jre</guava.version>
+    <spring-boot-dependencies.version>3.3.2</spring-boot-dependencies.version>
+    <h2.version>2.3.230</h2.version>
+    <commons.lang3.version>3.15.0</commons.lang3.version>
+    <guava.version>33.2.1-jre</guava.version>
     <junit.version>5.10.2</junit.version>
     <antlr4.version>4.13.1</antlr4.version>
 
     <!-- Plugin versions -->
-    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
-    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
     <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
-    <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
-    <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-    <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
-    <dependency-check-maven.version>9.0.10</dependency-check-maven.version>
+    <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+    <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version>
+    <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
+    <dependency-check-maven.version>10.0.3</dependency-check-maven.version>
   </properties>
 
   <dependencyManagement>
