@@ -40,6 +40,7 @@
     <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version>
     <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
     <dependency-check-maven.version>10.0.3</dependency-check-maven.version>
+    <gmavenplus-plugin.version>3.0.2</gmavenplus-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -427,6 +428,112 @@
           </execution>
 
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>${gmavenplus-plugin.version}</version>
+        <executions>
+          <execution>
+            <!--
+            <id>generate-release-pom</id>
+            <phase>generate-resources</phase>
+            -->
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scripts>
+            <script>
+              <![CDATA[
+                import org.apache.maven.model.io.xpp3.MavenXpp3Reader
+                import org.apache.maven.model.io.xpp3.MavenXpp3Writer
+                import org.apache.maven.model.Model
+                import org.apache.maven.model.Dependency
+
+                def pomFile = new File("pom.xml")
+
+                def reader = new FileReader(pomFile)
+                def mavenReader = new MavenXpp3Reader()
+                def model = mavenReader.read(reader)
+                reader.close()
+
+                def revision = System.properties['revision']
+                if (!revision) {
+                    throw new IllegalStateException("Please specify the revision using '-Drevision'")
+                }
+
+                println "Creating release pom.xml with revision: $revision"
+
+                // Interpolate model version
+                String newVersion = "${model.version.replace('${revision}', revision)}"
+
+                println "version interpolated: $newVersion"
+
+                // Create a new minimal model
+                def newModel = new Model()
+                newModel.modelVersion = '4.0.0'
+                newModel.groupId = model.groupId
+                newModel.artifactId = model.artifactId
+                newModel.version = newVersion
+
+                // Add only compile, runtime, or no-scope dependencies
+                List<Dependency> dependencies = model.dependencies.findAll { dep ->
+                    dep.scope in ['compile', 'runtime', null]
+                }.collect { dep ->
+                    // Interpolate version for each dependency
+                    String version
+                    if (dep.version.contains('${') && dep.version.contains('}')) {
+                        String versionKey = dep.version.replaceAll(/[\$\{\}]/, '')
+                        // use resolution from model.properties first, then try System.properties
+                        version = model.properties.getProperty(versionKey) ?: System.properties[versionKey] ?: dep.version
+                    } else {
+                        version = dep.version
+                    }
+                    new Dependency(groupId: dep.groupId, artifactId: dep.artifactId, version: version, scope: dep.scope)
+                }
+                newModel.dependencies.addAll(dependencies)
+
+                def writer = new MavenXpp3Writer()
+                writer.write(new FileWriter("./target/pom.xml"), newModel)
+             ]]>
+            </script>
+          </scripts>
+        </configuration>
+        <dependencies>
+
+          <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>4.0.22</version>
+            <scope>runtime</scope>
+          </dependency>
+
+          <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.9.8</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model-builder</artifactId>
+            <version>3.9.8</version>
+          </dependency>
+          <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>4.0.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-shared-utils</artifactId>
+            <version>3.4.2</version>
+          </dependency>
+
+        </dependencies>
       </plugin>
 
     </plugins>
