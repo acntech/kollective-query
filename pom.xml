@@ -23,23 +23,24 @@
     <revision>SNAPSHOT</revision>
 
     <!-- Library versions -->
-    <spring-boot-dependencies.version>3.2.4</spring-boot-dependencies.version>
-    <h2.version>2.2.224</h2.version>
-    <commons.lang3.version>3.14.0</commons.lang3.version>
-    <guava.version>33.1.0-jre</guava.version>
+    <spring-boot-dependencies.version>3.3.2</spring-boot-dependencies.version>
+    <h2.version>2.3.230</h2.version>
+    <commons.lang3.version>3.15.0</commons.lang3.version>
+    <guava.version>33.2.1-jre</guava.version>
     <junit.version>5.10.2</junit.version>
     <antlr4.version>4.13.1</antlr4.version>
 
     <!-- Plugin versions -->
-    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
-    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
     <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
-    <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
-    <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-    <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
-    <dependency-check-maven.version>9.0.10</dependency-check-maven.version>
+    <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+    <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version>
+    <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
+    <dependency-check-maven.version>10.0.3</dependency-check-maven.version>
+    <gmavenplus-plugin.version>3.0.2</gmavenplus-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -427,6 +428,115 @@
           </execution>
 
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>${gmavenplus-plugin.version}</version>
+        <executions>
+          <execution>
+            <!--
+            <id>generate-release-pom</id>
+            <phase>generate-resources</phase>
+            -->
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scripts>
+            <script>
+              <![CDATA[
+                import org.apache.maven.model.io.xpp3.MavenXpp3Reader
+                import org.apache.maven.model.io.xpp3.MavenXpp3Writer
+                import org.apache.maven.model.Model
+                import org.apache.maven.model.Dependency
+
+                def pomFile = new File("pom.xml")
+
+                def reader = new FileReader(pomFile)
+                def mavenReader = new MavenXpp3Reader()
+                def model = mavenReader.read(reader)
+                reader.close()
+
+                def revision = System.properties['revision']
+                if (!revision) {
+                    throw new IllegalStateException("Please specify the revision using '-Drevision'")
+                }
+
+                println "Creating release pom.xml with revision: $revision"
+
+                // Interpolate model version
+                String newVersion = "${model.version.replace('${revision}', revision)}"
+
+                println "version interpolated: $newVersion"
+
+                // Create a new minimal model
+                def newModel = new Model()
+                newModel.modelVersion = '4.0.0'
+                newModel.groupId = model.groupId
+                newModel.artifactId = model.artifactId
+                newModel.version = newVersion
+
+                // Add only compile, runtime, or no-scope dependencies
+                List<Dependency> dependencies = model.dependencies.findAll { dep ->
+                    dep.scope in ['compile', 'runtime', null] && !dep.groupId.startsWith('org.springframework.boot')
+                }.collect { dep ->
+                    // Interpolate version for each dependency
+                    String version
+                    if (dep.version != null && dep.version.contains('${') && dep.version.contains('}')) {
+                        String versionKey = dep.version.replaceAll(/[\$\{\}]/, '')
+                        // use resolution from model.properties first, then try System.properties
+                        version = model.properties.getProperty(versionKey) ?: System.properties[versionKey] ?: dep.version
+                    } else {
+                        version = dep.version
+                    }
+                    new Dependency(groupId: dep.groupId, artifactId: dep.artifactId, version: version, scope: dep.scope)
+                }
+                newModel.dependencies.addAll(dependencies)
+
+                def writer = new MavenXpp3Writer()
+                writer.write(new FileWriter("./target/pom.xml"), newModel)
+             ]]>
+            </script>
+          </scripts>
+        </configuration>
+        <dependencies>
+
+          <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>4.0.22</version>
+            <scope>runtime</scope>
+          </dependency>
+
+          <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.9.8</version>
+          </dependency>
+
+          <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model-builder</artifactId>
+            <version>3.9.8</version>
+          </dependency>
+
+          <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>4.0.1</version>
+          </dependency>
+
+          <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-shared-utils</artifactId>
+            <version>3.4.2</version>
+          </dependency>
+
+        </dependencies>
       </plugin>
 
     </plugins>

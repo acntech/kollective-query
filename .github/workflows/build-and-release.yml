@@ -1,0 +1,289 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+      - devops-test
+
+jobs:
+
+  build-application:
+    runs-on: ubuntu-latest
+
+    outputs:
+      VERSION_TAG: ${{ steps.version_info.outputs.VERSION_TAG }}
+      PROJECT_VERSION: ${{ steps.version_info.outputs.PROJECT_VERSION }}
+      SPRING_BOOT_VERSION: ${{ steps.version_info.outputs.SPRING_BOOT_VERSION }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Generate version tag and build
+        id: version_info
+        run: |
+          git fetch --tags
+          MAJOR_MINOR=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -E 's/([0-9]+\.[0-9]+).*/\1/')
+          echo "Extracted [major.minor] version: $MAJOR_MINOR"
+          LATEST_TAG=$(git tag -l "v*" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -rV | head -n 1)
+          echo "Latest tag: $LATEST_TAG"
+          if [ -z "$LATEST_TAG" ]; then
+              PATCH=0
+          else
+              TAG_MAJOR_MINOR=$(echo $LATEST_TAG | sed -E 's/v([0-9]+\.[0-9]+)\.[0-9]+/\1/')
+              TAG_PATCH=$(echo $LATEST_TAG | sed -E 's/v[0-9]+\.[0-9]+\.([0-9]+)/\1/')
+              if [ "$(printf '%s\n' "$TAG_MAJOR_MINOR" "$MAJOR_MINOR" | sort -rV | head -n 1)" != "$MAJOR_MINOR" ]; then
+                  echo "Current version is less than the last tag. Aborting."
+                  exit 1
+              elif [ "$MAJOR_MINOR" = "$TAG_MAJOR_MINOR" ]; then
+                  PATCH=$(($TAG_PATCH + 1))
+                  echo "Incremented patch version: $PATCH"
+              else
+                  PATCH=0
+                  echo "Patch version reset to 0"
+              fi
+          fi
+          PROJECT_VERSION="$MAJOR_MINOR.$PATCH"
+          echo "New project version: $PROJECT_VERSION"
+          echo "-----> Packaging"
+          mvn --quiet package -Drevision=$PATCH -DskipTests=true -Dmaven.javadoc.skip=true
+          echo "Packaging completed"
+          echo "-----> Creating release pom"
+          mvn --quiet -Drevision=$PATCH gplus:execute
+          VERSION_TAG=v$PROJECT_VERSION
+          echo "-----> Tagging version: $VERSION_TAG"
+          git tag "$VERSION_TAG"
+          git push origin "$VERSION_TAG"
+          echo "-----> Extracting Spring Boot version"
+          SPRING_BOOT_VERSION=$(mvn help:evaluate -Dexpression=spring-boot-dependencies.version -q -DforceStdout)
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
+          echo "PROJECT_VERSION=$PROJECT_VERSION" >> $GITHUB_OUTPUT
+          echo "SPRING_BOOT_VERSION=$SPRING_BOOT_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Upload JAR file
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-jar
+          path: target/*.jar
+          if-no-files-found: error
+
+      - name: Upload pom-release file
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-pom
+          path: target/pom.xml
+          if-no-files-found: error
+
+  publish-docs:
+    needs: build-application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Generate Javadoc
+        run: mvn dokka:javadoc -Ddokka.goal=javadoc -Ddokka.dir=./target/site/apidocs/javadoc
+
+      - name: Generate KDoc
+        run: mvn dokka:dokka -Ddokka.goal=dokka -Ddokka.dir=./target/site/apidocs/kdoc
+
+      - name: Prepare gh-pages content
+        run: |
+          cp -r ./src/main/resources/site/* .        
+          mkdir -p ./apidocs
+          cp -r ./target/site/apidocs/* ./apidocs/      
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          keep_files: false
+          allow_empty_commit: false
+          force_orphan: true
+
+  create-release:
+    needs: [build-application]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download JAR file
+        uses: actions/download-artifact@v2
+        with:
+          name: app-jar
+          path: ./
+
+      - name: Download release POM
+        uses: actions/download-artifact@v2
+        with:
+          name: release-pom
+          path: ./
+
+      - name: Debug Output
+        run: |
+          echo "VERSION_TAG from build-application job: ${{ needs.build-application.outputs.VERSION_TAG }}"
+          echo "PROJECT_VERSION from build-application job: ${{ needs.build-application.outputs.PROJECT_VERSION }}"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.build-application.outputs.VERSION_TAG }}
+          release_name: Release ${{ needs.build-application.outputs.PROJECT_VERSION }}
+          body: |
+            ## Installation
+            To manually install the JAR file included in this release, use the following Maven command:            
+            ```sh
+            mvn install:install-file \
+              -Dfile=<path-to-jar-file> \
+              -DgroupId=no.acntech.kollectivequery \
+              -DartifactId=kollectivequery \
+              -Dversion=${{ needs.build-application.outputs.PROJECT_VERSION }} \
+              -Dpackaging=jar \
+              -DpomFile=<path-to-pom-file>
+            ```
+            Ensure to replace the placeholders with the actual path to the downloaded JAR file and the release pom file.
+            
+            Alternatively, run the following bash script to download and install the JAR file:            
+            ```sh
+            #!/bin/bash
+
+            # URLs for jar and pom files
+            JAR_URL=https://github.com/acntech/kollectivequery/releases/download/${{ needs.build-application.outputs.VERSION_TAG }}/kollectivequery-${{ needs.build-application.outputs.PROJECT_VERSION }}.jar
+            POM_URL=https://github.com/acntech/kollectivequery/releases/download/${{ needs.build-application.outputs.VERSION_TAG }}/pom.xml
+            
+            # Create a temporary directory
+            TEMP_DIR=$(mktemp -d -t ci-XXXXXXXXXX)
+            
+            # File paths
+            JAR_FILE_PATH=$TEMP_DIR/kollectivequery-${{ needs.build-application.outputs.PROJECT_VERSION }}.jar
+            POM_FILE_PATH=$TEMP_DIR/pom.xml
+            
+            # Download jar and pom files
+            curl -L -o $JAR_FILE_PATH $JAR_URL
+            curl -L -o $POM_FILE_PATH $POM_URL
+            
+            echo "Jar and POM files downloaded to $TEMP_DIR"
+            
+            # Maven install command
+            mvn install:install-file \
+            -Dfile=$JAR_FILE_PATH \
+            -DgroupId=no.acntech.kollectivequery \
+            -DartifactId=kollectivequery \
+            -Dversion=${{ needs.build-application.outputs.PROJECT_VERSION }} \
+            -Dpackaging=jar \
+            -DpomFile=$POM_FILE_PATH
+            
+            # Delete the temporary directory 
+            rm -r $TEMP_DIR
+            ```
+            
+            ## Gradle/Maven Dependency
+            Note that the Spring Boot version for Spring Boot dependencies used in this release is ${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}.
+            
+            For Gradle, add this to your `build.gradle` file's dependencies block: 
+            ```groovy
+            implementation 'no.acntech.kollectivequery:kollectivequery:${{ needs.build-application.outputs.PROJECT_VERSION }}'
+            implementation 'org.springframework.boot:spring-boot-starter-web'
+            implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+            implementation 'org.springframework.boot:spring-boot-starter-logging'
+            ```
+            
+            For managing Spring Boot version:
+            ```groovy
+            plugins {
+              id 'org.springframework.boot' version '${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}'
+              id 'io.spring.dependency-management' version '1.1.6'
+            }           
+            ```
+            
+            For Maven, add this to your `pom.xml` file's dependencies block:
+            ```xml
+            <dependency>
+              <groupId>no.acntech.kollectivequery</groupId>
+              <artifactId>kollectivequery</artifactId>
+              <version>${{ needs.build-application.outputs.PROJECT_VERSION }}</version>
+            </dependency>
+            
+            <!-- Include the following Spring Boot Starter dependencies -->
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-jpa</artifactId>
+            </dependency>
+            
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-logging</artifactId>
+            </dependency>
+            ```
+            
+            For managing Spring Boot version, either use a parent POM:
+            ```xml
+            <parent>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-parent</artifactId>
+              <version>${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}</version>
+            </parent>
+            ```
+            
+            Or, define the spring boot dependencies in the `dependencyManagement` section:
+            ```xml
+            <dependencyManagement>
+              <dependencies>
+                <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-dependencies</artifactId>
+                  <version>${{ needs.build-application.outputs.SPRING_BOOT_VERSION }}</version>
+                  <type>pom</type>
+                  <scope>import</scope>
+                </dependency>
+              </dependencies>
+            </dependencyManagement>
+            ```
+
+          draft: false
+          prerelease: true
+
+      - name: Upload Jar
+        id: upload_release_jar
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./kollectivequery-${{ needs.build-application.outputs.PROJECT_VERSION }}.jar
+          asset_name: kollectivequery-${{ needs.build-application.outputs.PROJECT_VERSION }}.jar
+          asset_content_type: application/java-archive
+
+      - name: Upload Release POM
+        id: upload_release_pom
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pom.xml
+          asset_name: pom.xml
+          asset_content_type: application/xml
